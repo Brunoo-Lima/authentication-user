@@ -1,9 +1,8 @@
-import { Request, Response, Router } from 'express';
+import { Router } from 'express';
+import { CreateUserController } from './controllers/CreateUserController';
 
 const router = Router();
 
-router.get('/', (req: Request, res: Response) => {
-  return res.send({ ok: true });
-});
+router.post('/user', new CreateUserController().handle);
 
 export { router };
