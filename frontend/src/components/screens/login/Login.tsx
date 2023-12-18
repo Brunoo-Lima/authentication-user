@@ -1,11 +1,23 @@
-import React from 'react';
+import { useState } from 'react';
 import styles from './Login.module.css';
 import login from '../../../assets/login.svg';
 import Input from '../../form/Input';
 import Button from '../../form/Button';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Login = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const navigate = useNavigate();
+
+  function handleLogin() {
+    if (email == '' || password == '') {
+      alert('Preencha os campos');
+    } else {
+      navigate('/user');
+    }
+  }
+
   return (
     <section className={styles.container}>
       <div className={styles.sideLeft}>
@@ -15,12 +27,18 @@ const Login = () => {
       <div className={styles.sideRight}>
         <h1 className={styles.title}>Entrar na conta</h1>
 
-        <form className={styles.form}>
+        <form className={styles.form} onSubmit={(e) => e.preventDefault()}>
           <div>
             <label htmlFor="email" className={styles.label}>
               Email
             </label>
-            <Input type="email" name="email" placeholder="Digite seu email" />
+            <Input
+              type="email"
+              name="email"
+              placeholder="Digite seu email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
           </div>
 
           <div>
@@ -31,13 +49,15 @@ const Login = () => {
               type="password"
               name="password"
               placeholder="Digite sua senha"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
             />
           </div>
           <Link to="/*" className={styles.forgetPass}>
             Esqueceu a senha?
           </Link>
 
-          <Button>Entrar</Button>
+          <Button onClick={handleLogin}>Entrar</Button>
 
           <p className={styles.register}>
             Não possui conta? <Link to="/register">Registrar</Link>

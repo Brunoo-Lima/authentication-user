@@ -3,12 +3,12 @@ import styles from './Button.module.css';
 
 interface ButtonComponent {
   children: ReactNode;
-  action?: () => void;
+  onClick?: () => void;
 }
 
-const Button = ({ children, action }: ButtonComponent) => {
+const Button = ({ children, onClick }: ButtonComponent) => {
   return (
-    <button className={styles.btn} onClick={action}>
+    <button className={styles.btn} onClick={onClick}>
       {children}
     </button>
   );
