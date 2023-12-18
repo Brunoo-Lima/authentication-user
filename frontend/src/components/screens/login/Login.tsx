@@ -33,7 +33,7 @@ const Login = () => {
               placeholder="Digite sua senha"
             />
           </div>
-          <Link to="/forgetPass" className={styles.forgetPass}>
+          <Link to="/*" className={styles.forgetPass}>
             Esqueceu a senha?
           </Link>
 
