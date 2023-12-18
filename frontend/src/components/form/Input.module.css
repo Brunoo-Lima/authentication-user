@@ -12,10 +12,3 @@
 .input:focus-visible {
   border-color: #e48f4f;
 }
-
-@media (max-width: 400px) {
-  .input {
-    max-width: 100%;
-    width: 300px;
-  }
-}

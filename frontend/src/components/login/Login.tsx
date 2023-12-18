@@ -1,17 +1,20 @@
 import React from 'react';
 import styles from './Login.module.css';
+import login from '../../assets/login.svg';
 import Input from '../form/Input';
 import Button from '../form/Button';
 
 const Login = () => {
   return (
     <section className={styles.container}>
-      <div className={styles.sideLeft}>Lado esquerdo</div>
+      <div className={styles.sideLeft}>
+        <img className={styles.imgLogin} src={login} alt="Imagem de login" />
+      </div>
 
       <div className={styles.sideRight}>
         <h1 className={styles.title}>Entrar na conta</h1>
 
-        <form>
+        <form className={styles.form}>
           <div className={styles.inputs}>
             <label htmlFor="email" className={styles.label}>
               Email
