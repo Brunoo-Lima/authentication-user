@@ -2,9 +2,9 @@
   max-width: 100%;
   width: 350px;
   padding: 0.625rem 1.5rem;
-  background: #e48f4f;
+  background: var(--secondary-color);
   border-radius: 8px;
-  border: 1px solid #e48f4f;
+  border: 1px solid var(--secondary-color);
   color: #ffffff;
   cursor: pointer;
   display: block;

@@ -10,5 +10,5 @@
 }
 
 .input:focus-visible {
-  border-color: #e48f4f;
+  border-color: var(--secondary-color);
 }
