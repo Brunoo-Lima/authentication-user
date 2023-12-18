@@ -9,6 +9,7 @@
 .sideLeft {
   background: #ffffff !important;
   height: 100%;
+  padding-top: 50px;
 }
 
 .imgLogin {
@@ -26,10 +27,6 @@
 .title {
   font-size: 2.5rem;
   margin-bottom: 1rem;
-}
-
-.inputs {
-  margin-bottom: 10px;
 }
 
 .forgetPass {

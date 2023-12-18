@@ -1,8 +1,9 @@
 import React from 'react';
 import styles from './Login.module.css';
-import login from '../../assets/login.svg';
-import Input from '../form/Input';
-import Button from '../form/Button';
+import login from '../../../assets/login.svg';
+import Input from '../../form/Input';
+import Button from '../../form/Button';
+import { Link } from 'react-router-dom';
 
 const Login = () => {
   return (
@@ -15,14 +16,14 @@ const Login = () => {
         <h1 className={styles.title}>Entrar na conta</h1>
 
         <form className={styles.form}>
-          <div className={styles.inputs}>
+          <div>
             <label htmlFor="email" className={styles.label}>
               Email
             </label>
             <Input type="email" name="email" placeholder="Digite seu email" />
           </div>
 
-          <div className={styles.inputs}>
+          <div>
             <label htmlFor="password" className={styles.label}>
               Senha
             </label>
@@ -32,14 +33,14 @@ const Login = () => {
               placeholder="Digite sua senha"
             />
           </div>
-          <a href="#" className={styles.forgetPass}>
+          <Link to="/forgetPass" className={styles.forgetPass}>
             Esqueceu a senha?
-          </a>
+          </Link>
 
           <Button>Entrar</Button>
 
           <p className={styles.register}>
-            Não possui conta? <a href="#">Registrar</a>
+            Não possui conta? <Link to="/register">Registrar</Link>
           </p>
         </form>
       </div>

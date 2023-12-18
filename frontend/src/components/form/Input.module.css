@@ -7,6 +7,7 @@
   font-size: 0.75rem;
   display: block;
   outline: none;
+  margin-bottom: 0.75rem;
 }
 
 .input:focus-visible {
