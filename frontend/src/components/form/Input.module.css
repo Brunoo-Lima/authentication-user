@@ -1,0 +1,21 @@
+.input {
+  max-width: 100%;
+  width: 350px;
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  border: 0.0625rem solid #ccc;
+  font-size: 0.75rem;
+  display: block;
+  outline: none;
+}
+
+.input:focus-visible {
+  border-color: #e48f4f;
+}
+
+@media (max-width: 400px) {
+  .input {
+    max-width: 100%;
+    width: 300px;
+  }
+}
