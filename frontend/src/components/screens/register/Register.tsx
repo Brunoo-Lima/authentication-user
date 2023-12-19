@@ -1,21 +1,68 @@
-import { useState } from 'react';
+import { FormEvent, useState } from 'react';
 import styles from './Register.module.css';
 import Input from './../../form/Input';
 import Button from './../../form/Button';
 import { useNavigate } from 'react-router-dom';
 
-const Register = () => {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+interface RegisterComponent {
+  name: string;
+  email: string;
+  password: string;
+}
+
+const Register = ({ name, email, password }: RegisterComponent) => {
+  // const [name, setName] = useState('');
+  // const [email, setEmail] = useState('');
+  // const [password, setPassword] = useState('');
+
+  const [userData, setUserData] = useState({
+    name: '',
+    email: '',
+    password: '',
+  });
   const navigate = useNavigate();
 
-  function createUser() {
-    if (name == '' || email == '' || password == '') {
-      alert('Verifique os campos');
-    } else {
-      alert('Usuário criado com sucesso');
+  // function createUser() {
+  //   if (
+  //     userData.name == '' ||
+  //     userData.email == '' ||
+  //     userData.password == ''
+  //   ) {
+  //     alert('Verifique os campos');
+  //   } else {
+  //     alert('Usuário criado com sucesso');
+  //     navigate('/');
+  //   }
+  // }
+
+  function handleChange(e) {
+    const { name, value } = e.target;
+
+    setUserData((data) => ({
+      ...data,
+      [name]: value,
+      [email]: value,
+      [password]: value,
+    }));
+  }
+
+  async function createUserNow() {
+    try {
+      const response = await fetch('http://localhost:3000/user', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(userData),
+      });
+
+      if (!response.ok) throw new Error('Error');
+
+      const data = await response.json();
+      setUserData(data);
       navigate('/');
+    } catch (error) {
+      console.error(error);
     }
   }
 
@@ -34,8 +81,9 @@ const Register = () => {
               type="text"
               name="name"
               placeholder="Digite seu nome"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
+              value={userData.name}
+              onChange={handleChange}
+              // onChange={(e) => setName(e.target.value)}
             />
           </div>
 
@@ -45,8 +93,9 @@ const Register = () => {
               type="email"
               name="email"
               placeholder="Digite seu email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              value={userData.email}
+              onChange={handleChange}
+              // onChange={(e) => setEmail(e.target.value)}
             />
           </div>
 
@@ -56,13 +105,14 @@ const Register = () => {
               type="password"
               name="password"
               placeholder="Digite sua senha"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              value={userData.password}
+              onChange={handleChange}
+              // onChange={(e) => setPassword(e.target.value)}
             />
           </div>
 
           <div className={styles.btnRegister}>
-            <Button onClick={createUser}>Criar Usuário</Button>
+            <Button onClick={createUserNow}>Criar Usuário</Button>
           </div>
         </form>
       </div>

@@ -8,6 +8,8 @@ import { Link, useNavigate } from 'react-router-dom';
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  // const [user, setUser] = useState({ email: '', password: '' });
   const navigate = useNavigate();
 
   function handleLogin() {
@@ -17,6 +19,13 @@ const Login = () => {
       navigate('/user');
     }
   }
+
+  // async function loginUser() {
+  //   const resp = await fetch('/user/login');
+  //   const json = await resp.json();
+
+  //   setUser(json);
+  // }
 
   return (
     <section className={styles.container}>
