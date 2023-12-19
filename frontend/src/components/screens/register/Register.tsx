@@ -10,6 +10,8 @@ interface RegisterComponent {
   password: string;
 }
 
+//TODO: EM ANDAMENTO
+
 const Register = ({ name, email, password }: RegisterComponent) => {
   // const [name, setName] = useState('');
   // const [email, setEmail] = useState('');
