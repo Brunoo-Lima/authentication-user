@@ -1,6 +1,6 @@
-//require('dotenv').config();
-import express, { Request, Response } from 'express';
+require('dotenv').config();
 import 'express-async-errors';
+import express, { Request, Response } from 'express';
 import cors from 'cors';
 import { router } from './router';
 
@@ -23,4 +23,4 @@ app.use((err: Error, req: Request, res: Response) => {
   });
 });
 
-app.listen(3000);
+app.listen(3000, () => console.log('Servidor Online!'));
