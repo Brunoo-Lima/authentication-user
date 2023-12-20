@@ -1,54 +1,28 @@
-import { FormEvent, useState } from 'react';
+import { useState } from 'react';
 import styles from './Register.module.css';
 import Input from './../../form/Input';
 import Button from './../../form/Button';
 import { useNavigate } from 'react-router-dom';
 
-interface RegisterComponent {
-  name: string;
-  email: string;
-  password: string;
-}
-
-//TODO: EM ANDAMENTO
-
-const Register = ({ name, email, password }: RegisterComponent) => {
-  // const [name, setName] = useState('');
-  // const [email, setEmail] = useState('');
-  // const [password, setPassword] = useState('');
-
+const Register = () => {
   const [userData, setUserData] = useState({
     name: '',
     email: '',
     password: '',
   });
+
   const navigate = useNavigate();
 
-  // function createUser() {
-  //   if (
-  //     userData.name == '' ||
-  //     userData.email == '' ||
-  //     userData.password == ''
-  //   ) {
-  //     alert('Verifique os campos');
-  //   } else {
-  //     alert('Usuário criado com sucesso');
-  //     navigate('/');
-  //   }
-  // }
-
-  function handleChange(e) {
+  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     const { name, value } = e.target;
 
     setUserData((data) => ({
       ...data,
       [name]: value,
-      [email]: value,
-      [password]: value,
     }));
   }
 
-  async function createUserNow() {
+  async function createUser() {
     try {
       const response = await fetch('http://localhost:3000/user', {
         method: 'POST',
@@ -58,13 +32,16 @@ const Register = ({ name, email, password }: RegisterComponent) => {
         body: JSON.stringify(userData),
       });
 
-      if (!response.ok) throw new Error('Error');
-
       const data = await response.json();
-      setUserData(data);
-      navigate('/');
+
+      if (!response.ok) {
+        alert(`${data.error}`);
+      } else {
+        setUserData(data);
+        navigate('/');
+      }
     } catch (error) {
-      console.error(error);
+      alert(`${error}`);
     }
   }
 
@@ -85,7 +62,6 @@ const Register = ({ name, email, password }: RegisterComponent) => {
               placeholder="Digite seu nome"
               value={userData.name}
               onChange={handleChange}
-              // onChange={(e) => setName(e.target.value)}
             />
           </div>
 
@@ -97,10 +73,8 @@ const Register = ({ name, email, password }: RegisterComponent) => {
               placeholder="Digite seu email"
               value={userData.email}
               onChange={handleChange}
-              // onChange={(e) => setEmail(e.target.value)}
             />
           </div>
-
           <div>
             <label htmlFor="password">Senha</label>
             <Input
@@ -109,12 +83,13 @@ const Register = ({ name, email, password }: RegisterComponent) => {
               placeholder="Digite sua senha"
               value={userData.password}
               onChange={handleChange}
-              // onChange={(e) => setPassword(e.target.value)}
             />
           </div>
 
           <div className={styles.btnRegister}>
-            <Button onClick={createUserNow}>Criar Usuário</Button>
+            <Button type="submit" onClick={createUser}>
+              Criar Usuário
+            </Button>
           </div>
         </form>
       </div>
