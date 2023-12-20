@@ -1,6 +1,6 @@
 require('dotenv').config();
 import 'express-async-errors';
-import express, { Request, Response } from 'express';
+import express, { NextFunction, Request, Response } from 'express';
 import cors from 'cors';
 import { router } from './router';
 
@@ -10,7 +10,7 @@ app.use(cors());
 
 app.use(router);
 
-app.use((err: Error, req: Request, res: Response) => {
+app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   if (err instanceof Error) {
     return res.status(400).json({
       error: err.message,

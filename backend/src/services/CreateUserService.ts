@@ -9,7 +9,7 @@ interface UserRequest {
 
 class CreateUserService {
   async execute({ name, email, password }: UserRequest) {
-    if (!email) throw new Error('Email não cadastrado');
+    if (!email) throw new Error('Email não cadastrado!');
 
     const userAlreadyExists = await prismaClient.user.findFirst({
       where: {
