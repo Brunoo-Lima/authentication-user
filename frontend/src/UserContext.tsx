@@ -8,7 +8,7 @@ interface UserData {
   password: string;
 }
 
-interface MyContextType {
+interface UserContextType {
   user?: string;
   setUser?: React.Dispatch<React.SetStateAction<string | undefined>>;
   navigate?: () => void;
@@ -21,11 +21,11 @@ interface UserContextComponent {
   children: ReactNode;
 }
 
-const UserContext = createContext<MyContextType | undefined>(undefined);
+export const UserContext = createContext<UserContextType | undefined>(
+  undefined,
+);
 
-//TODO: FALTA FAZER AINDA
-
-const UserProvider: React.FC<UserContextComponent> = ({ children }) => {
+export const UserProvider: React.FC<UserContextComponent> = ({ children }) => {
   const [user, setUser] = useState<string | undefined>('');
   const navigate = useNavigate();
 
@@ -36,6 +36,10 @@ const UserProvider: React.FC<UserContextComponent> = ({ children }) => {
   });
 
   async function createUser() {
+    if (!userData.name || !userData.email || !userData.password) {
+      alert('Preencha os campos!');
+      return;
+    }
     try {
       const { url, options } = USER_POST(userData);
 
@@ -53,7 +57,7 @@ const UserProvider: React.FC<UserContextComponent> = ({ children }) => {
     }
   }
 
-  const contextValue: MyContextType = {
+  const contextValue: UserContextType = {
     user,
     setUser,
     userData,
@@ -65,5 +69,3 @@ const UserProvider: React.FC<UserContextComponent> = ({ children }) => {
     <UserContext.Provider value={contextValue}>{children}</UserContext.Provider>
   );
 };
-
-export { UserProvider, UserContext };

@@ -2,20 +2,14 @@ import { useContext } from 'react';
 import styles from './Register.module.css';
 import Input from './../../form/Input';
 import Button from './../../form/Button';
-// import { useNavigate } from 'react-router-dom';
-// import { USER_POST } from '../../../api';
+
 import { UserContext } from '../../../UserContext';
 
 const Register: React.FC = () => {
-  // const [userData, setUserData] = useState({
-  //   name: '',
-  //   email: '',
-  //   password: '',
-  // });
+  const context = useContext(UserContext);
 
-  // const navigate = useNavigate();
+  const { userData, setUserData, createUser } = context!;
 
-  const { userData, setUserData, createUser } = useContext(UserContext);
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     const { name, value } = e.target;
 
@@ -24,24 +18,6 @@ const Register: React.FC = () => {
       [name]: value,
     }));
   }
-
-  // async function createUser() {
-  //   try {
-  //     const { url, options } = USER_POST(userData);
-
-  //     const response = await fetch(url, options);
-  //     const data = await response.json();
-
-  //     if (!response.ok) {
-  //       alert(`${data.error}`);
-  //     } else {
-  //       setUserData(data);
-  //       navigate('/');
-  //     }
-  //   } catch (error) {
-  //     alert(`${error}`);
-  //   }
-  // }
 
   return (
     <section className={styles.container}>
@@ -60,6 +36,7 @@ const Register: React.FC = () => {
               placeholder="Digite seu nome"
               value={userData.name}
               onChange={handleChange}
+              required
             />
           </div>
 
@@ -71,6 +48,7 @@ const Register: React.FC = () => {
               placeholder="Digite seu email"
               value={userData.email}
               onChange={handleChange}
+              required
             />
           </div>
           <div>
@@ -81,6 +59,7 @@ const Register: React.FC = () => {
               placeholder="Digite sua senha"
               value={userData.password}
               onChange={handleChange}
+              required
             />
           </div>
 
