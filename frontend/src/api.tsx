@@ -6,6 +6,8 @@ interface UserPostBody {
   password: string;
 }
 
+type UserLogin = Omit<UserPostBody, 'name'>;
+
 export function USER_POST(body: UserPostBody) {
   return {
     url: API_URL + '/user',
@@ -19,14 +21,15 @@ export function USER_POST(body: UserPostBody) {
   };
 }
 
-// export function USER_GET(token) {
-//   return {
-//     url: API_URL + '/user',
-//     options: {
-//       method: 'GET',
-//       headers: {
-//         Authorization: 'Bearer ' + token,
-//       },
-//     },
-//   };
-// }
+export function USER_LOGIN({ email, password }: UserLogin) {
+  return {
+    url: API_URL + '/me',
+    options: {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ email, password }),
+    },
+  };
+}

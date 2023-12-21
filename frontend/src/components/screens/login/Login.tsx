@@ -1,36 +1,34 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import styles from './Login.module.css';
-import login from '../../../assets/login.svg';
+import loginImg from '../../../assets/login.svg';
 import Input from '../../form/Input';
 import Button from '../../form/Button';
 import { Link, useNavigate } from 'react-router-dom';
+import { UserContext } from '../../../UserContext';
 
 const Login = () => {
+  const context = useContext(UserContext);
+
+  const { userLogin } = context!;
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   // const [user, setUser] = useState({ email: '', password: '' });
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
-  function handleLogin() {
-    if (email == '' || password == '') {
-      alert('Preencha os campos');
-    } else {
-      navigate('/user');
+  async function handleLogin() {
+    try {
+      await userLogin(email, password);
+    } catch (error) {
+      alert(error);
     }
   }
-
-  // async function loginUser() {
-  //   const resp = await fetch('/user/login');
-  //   const json = await resp.json();
-
-  //   setUser(json);
-  // }
 
   return (
     <section className={styles.container}>
       <div className={styles.sideLeft}>
-        <img className={styles.imgLogin} src={login} alt="Imagem de login" />
+        <img className={styles.imgLogin} src={loginImg} alt="Imagem de login" />
       </div>
 
       <div className={styles.sideRight}>
@@ -47,6 +45,7 @@ const Login = () => {
               placeholder="Digite seu email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              required
             />
           </div>
 
@@ -60,6 +59,7 @@ const Login = () => {
               placeholder="Digite sua senha"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              required
             />
           </div>
           <Link to="/*" className={styles.forgetPass}>
