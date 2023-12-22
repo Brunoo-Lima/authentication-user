@@ -1,10 +1,12 @@
 import { Link } from 'react-router-dom';
 import styles from './NotFound.module.css';
 import error from '../../../assets/error.svg';
+import Head from './Head';
 
 const NotFound = () => {
   return (
     <section className={styles.container}>
+      <Head title="Página não encontrada" />
       <div>
         <img className={styles.errorLogo} src={error} alt="Error 404" />
       </div>

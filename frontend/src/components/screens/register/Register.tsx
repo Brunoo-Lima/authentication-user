@@ -5,6 +5,7 @@ import Button from './../../form/Button';
 
 import { UserContext } from '../../../UserContext';
 import { Link } from 'react-router-dom';
+import Head from '../helper/Head';
 
 const Register: React.FC = () => {
   const context = useContext(UserContext);
@@ -22,6 +23,7 @@ const Register: React.FC = () => {
 
   return (
     <section className={styles.container}>
+      <Head title="Criar conta" />
       <div className={styles.content}>
         <h1 className={styles.title}>Dados Pessoais</h1>
 

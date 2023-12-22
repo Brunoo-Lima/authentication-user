@@ -6,6 +6,7 @@ import Button from '../../form/Button';
 import { Link } from 'react-router-dom';
 import { UserContext } from '../../../UserContext';
 import { toast } from 'react-toastify';
+import Head from '../helper/Head';
 
 const Login = () => {
   const context = useContext(UserContext);
@@ -29,6 +30,7 @@ const Login = () => {
 
   return (
     <section className={styles.container}>
+      <Head title="Login" />
       <div className={styles.sideLeft}>
         <img className={styles.imgLogin} src={loginImg} alt="Imagem de login" />
       </div>
