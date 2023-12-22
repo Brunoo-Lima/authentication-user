@@ -22,4 +22,5 @@ se o usuário existe e se as informações coincidem, ao fazer isso, o usuário 
 
 - React
 - TypeScript
+- CSS Modules
 - Toastify
