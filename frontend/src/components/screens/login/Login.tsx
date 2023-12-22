@@ -5,6 +5,7 @@ import Input from '../../form/Input';
 import Button from '../../form/Button';
 import { Link } from 'react-router-dom';
 import { UserContext } from '../../../UserContext';
+import { toast } from 'react-toastify';
 
 const Login = () => {
   const context = useContext(UserContext);
@@ -16,13 +17,13 @@ const Login = () => {
 
   async function handleLogin() {
     if (email == '' || password == '') {
-      alert('Preencha os campos!');
+      toast.warn('Preencha os campos!');
       return;
     }
     try {
       await userLogin(email, password);
     } catch (error) {
-      alert(error);
+      toast.error(`${error}`);
     }
   }
 

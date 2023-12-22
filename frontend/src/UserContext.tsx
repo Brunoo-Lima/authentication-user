@@ -1,6 +1,7 @@
 import { ReactNode, createContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { USER_LOGIN, USER_REGISTER } from './api';
+import { toast } from 'react-toastify';
 
 interface UserData {
   name: string;
@@ -47,7 +48,7 @@ export const UserProvider: React.FC<UserContextComponent> = ({ children }) => {
 
   async function createUser() {
     if (!userData.name || !userData.email || !userData.password) {
-      alert('Preencha os campos!');
+      toast.warn('Preencha os campos!');
       return;
     }
     try {
@@ -57,13 +58,14 @@ export const UserProvider: React.FC<UserContextComponent> = ({ children }) => {
       const data = await response.json();
 
       if (!response.ok) {
-        alert(`${data.error}`);
+        toast.error(`${data.error}`);
       } else {
         setUserData(data);
+        toast.success('Usuário criado com sucesso');
         navigate('/');
       }
     } catch (error) {
-      alert(`${error}`);
+      toast.error(`${error}`);
     }
   }
 
@@ -75,7 +77,7 @@ export const UserProvider: React.FC<UserContextComponent> = ({ children }) => {
       const dataUser = await response.json();
 
       if (!response.ok) {
-        alert(`${dataUser.error}`);
+        toast.error(`${dataUser.error}`);
         return;
       }
 
@@ -90,7 +92,7 @@ export const UserProvider: React.FC<UserContextComponent> = ({ children }) => {
 
       navigate('/user');
     } catch (err) {
-      alert('error');
+      toast.error('error');
     }
   }
 

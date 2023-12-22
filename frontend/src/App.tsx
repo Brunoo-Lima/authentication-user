@@ -4,10 +4,13 @@ import Register from './components/screens/register/Register';
 import NotFound from './components/screens/helper/NotFound';
 import User from './components/screens/user/User';
 import { UserProvider } from './UserContext';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const App = () => {
   return (
-    <div>
+    <>
+      <ToastContainer autoClose={2500} />
       <BrowserRouter>
         <UserProvider>
           <Routes>
@@ -18,7 +21,7 @@ const App = () => {
           </Routes>
         </UserProvider>
       </BrowserRouter>
-    </div>
+    </>
   );
 };
 
