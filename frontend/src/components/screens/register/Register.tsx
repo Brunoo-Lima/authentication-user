@@ -4,6 +4,7 @@ import Input from './../../form/Input';
 import Button from './../../form/Button';
 
 import { UserContext } from '../../../UserContext';
+import { Link } from 'react-router-dom';
 
 const Register: React.FC = () => {
   const context = useContext(UserContext);
@@ -67,6 +68,12 @@ const Register: React.FC = () => {
             <Button type="submit" onClick={createUser}>
               Criar Usuário
             </Button>
+          </div>
+
+          <div className={styles.backContainer}>
+            <Link to="/" className={styles.back}>
+              Voltar
+            </Link>
           </div>
         </form>
       </div>

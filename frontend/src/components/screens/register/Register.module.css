@@ -28,6 +28,16 @@
   margin-top: 2.5rem;
 }
 
+.backContainer {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.back {
+  font-weight: bold;
+}
+
 @media (max-width: 768px) {
   .content {
     padding: 3rem 1rem;

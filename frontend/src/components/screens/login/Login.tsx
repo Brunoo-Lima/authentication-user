@@ -64,9 +64,11 @@ const Login = () => {
               required
             />
           </div>
-          <Link to="/*" className={styles.forgetPass}>
-            Esqueceu a senha?
-          </Link>
+          <div className={styles.containerForgetPass}>
+            <Link to="/*" className={styles.forgetPass}>
+              Esqueceu a senha?
+            </Link>
+          </div>
 
           <Button onClick={handleLogin}>Entrar</Button>
 
