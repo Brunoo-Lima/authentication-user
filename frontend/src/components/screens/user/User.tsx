@@ -1,10 +1,11 @@
 import { useContext } from 'react';
 import { UserContext } from '../../../UserContext';
 import styles from './User.module.css';
+import Button from '../../form/Button';
 
 const User = () => {
   const context = useContext(UserContext);
-  const { userData } = context!;
+  const { userData, userLogout } = context!;
 
   return (
     <div className={styles.container}>
@@ -12,6 +13,8 @@ const User = () => {
         Olá,
         <span className={styles.user}> {userData.name}!</span>
       </h1>
+
+      <Button onClick={userLogout}>Sair</Button>
     </div>
   );
 };

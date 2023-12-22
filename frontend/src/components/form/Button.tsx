@@ -7,9 +7,9 @@ interface ButtonComponent {
   type?: 'submit' | 'reset' | 'button';
 }
 
-const Button = ({ children, onClick, type }: ButtonComponent) => {
+const Button = ({ children, onClick, type, ...rest }: ButtonComponent) => {
   return (
-    <button className={styles.btn} type={type} onClick={onClick}>
+    <button className={styles.btn} type={type} onClick={onClick} {...rest}>
       {children}
     </button>
   );

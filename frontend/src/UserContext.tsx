@@ -14,6 +14,7 @@ interface UserContextType {
   setUserData: React.Dispatch<React.SetStateAction<UserData>>;
   createUser: () => Promise<void>;
   userLogin: (email: string, password: string) => Promise<void>;
+  userLogout: () => void;
 }
 
 interface UserContextComponent {
@@ -93,11 +94,25 @@ export const UserProvider: React.FC<UserContextComponent> = ({ children }) => {
     }
   }
 
+  function userLogout() {
+    setUserData({
+      name: '',
+      email: '',
+      password: '',
+    });
+
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+
+    navigate('/');
+  }
+
   const contextValue: UserContextType = {
     userData,
     setUserData,
     createUser,
     userLogin,
+    userLogout,
   };
 
   return (
