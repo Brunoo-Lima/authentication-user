@@ -8,7 +8,7 @@ interface UserPostBody {
 
 type UserLogin = Omit<UserPostBody, 'name'>;
 
-export function USER_POST(body: UserPostBody) {
+export function USER_REGISTER(body: UserPostBody) {
   return {
     url: API_URL + '/user',
     options: {

@@ -1,15 +1,17 @@
 import { useContext } from 'react';
 import { UserContext } from '../../../UserContext';
+import styles from './User.module.css';
 
 const User = () => {
-  // const { user } = useContext(UserContext);
+  const context = useContext(UserContext);
+  const { userData } = context!;
 
   return (
-    <div>
-      {/* <h1>{user}</h1>
-       */}
-
-      <h1>Olá</h1>
+    <div className={styles.container}>
+      <h1>
+        Olá,
+        <span className={styles.user}> {userData.name}!</span>
+      </h1>
     </div>
   );
 };

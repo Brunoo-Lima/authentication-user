@@ -1,24 +1,18 @@
-import { ReactNode, createContext, useState } from 'react';
+import { ReactNode, createContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { USER_LOGIN, USER_POST } from './api';
+import { USER_LOGIN, USER_REGISTER } from './api';
 
 interface UserData {
-  name?: string;
+  name: string;
   email: string;
   password: string;
 }
 
-// type UserDataLogin = Omit<UserData, 'name'>;
-
 interface UserContextType {
-  user: UserData;
-  setUser: React.Dispatch<React.SetStateAction<UserData>>;
   navigate?: () => void;
-  // login: UserDataLogin;
-  // setLogin: React.Dispatch<React.SetStateAction<UserDataLogin>>;
   userData: UserData;
   setUserData: React.Dispatch<React.SetStateAction<UserData>>;
-  createUser: () => void;
+  createUser: () => Promise<void>;
   userLogin: (email: string, password: string) => Promise<void>;
 }
 
@@ -31,11 +25,6 @@ export const UserContext = createContext<UserContextType | undefined>(
 );
 
 export const UserProvider: React.FC<UserContextComponent> = ({ children }) => {
-  const [user, setUser] = useState<UserData>({
-    email: '',
-    password: '',
-  });
-
   const [userData, setUserData] = useState<UserData>({
     name: '',
     email: '',
@@ -44,13 +33,24 @@ export const UserProvider: React.FC<UserContextComponent> = ({ children }) => {
 
   const navigate = useNavigate();
 
+  useEffect(() => {
+    const storedUsername = localStorage.getItem('user');
+
+    if (storedUsername) {
+      setUserData((prevData) => ({
+        ...(prevData || {}),
+        name: storedUsername,
+      }));
+    }
+  }, []);
+
   async function createUser() {
     if (!userData.name || !userData.email || !userData.password) {
       alert('Preencha os campos!');
       return;
     }
     try {
-      const { url, options } = USER_POST(userData);
+      const { url, options } = USER_REGISTER(userData);
 
       const response = await fetch(url, options);
       const data = await response.json();
@@ -68,8 +68,6 @@ export const UserProvider: React.FC<UserContextComponent> = ({ children }) => {
 
   async function userLogin(email: string, password: string) {
     try {
-      console.log('chegou aqui');
-
       const { url, options } = USER_LOGIN({ email, password });
 
       const response = await fetch(url, options);
@@ -80,11 +78,13 @@ export const UserProvider: React.FC<UserContextComponent> = ({ children }) => {
         return;
       }
 
-      setUser({
+      setUserData({
+        name: dataUser.name,
         email: dataUser.email,
         password: dataUser.password,
       });
 
+      localStorage.setItem('user', dataUser.name);
       localStorage.setItem('token', dataUser.token);
 
       navigate('/user');
@@ -94,8 +94,6 @@ export const UserProvider: React.FC<UserContextComponent> = ({ children }) => {
   }
 
   const contextValue: UserContextType = {
-    user,
-    setUser,
     userData,
     setUserData,
     createUser,

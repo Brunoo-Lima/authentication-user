@@ -1,0 +1,12 @@
+.container {
+  background: var(--tertiary-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.user {
+  text-transform: capitalize;
+  font-weight: 100;
+}
