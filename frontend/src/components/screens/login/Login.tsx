@@ -3,7 +3,7 @@ import styles from './Login.module.css';
 import loginImg from '../../../assets/login.svg';
 import Input from '../../form/Input';
 import Button from '../../form/Button';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { UserContext } from '../../../UserContext';
 
 const Login = () => {
@@ -14,10 +14,11 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  // const [user, setUser] = useState({ email: '', password: '' });
-  // const navigate = useNavigate();
-
   async function handleLogin() {
+    if (email == '' || password == '') {
+      alert('Preencha os campos!');
+      return;
+    }
     try {
       await userLogin(email, password);
     } catch (error) {

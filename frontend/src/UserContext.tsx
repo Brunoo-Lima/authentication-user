@@ -66,15 +66,10 @@ export const UserProvider: React.FC<UserContextComponent> = ({ children }) => {
     }
   }
 
-  //TODO: BUG, FALTA RESOLVER AINDA
-
   async function userLogin(email: string, password: string) {
-    if (user.email == '' || user.password == '') {
-      alert('Preencha os campos!');
-      return;
-    }
-
     try {
+      console.log('chegou aqui');
+
       const { url, options } = USER_LOGIN({ email, password });
 
       const response = await fetch(url, options);
@@ -82,6 +77,7 @@ export const UserProvider: React.FC<UserContextComponent> = ({ children }) => {
 
       if (!response.ok) {
         alert(`${dataUser.error}`);
+        return;
       }
 
       setUser({
