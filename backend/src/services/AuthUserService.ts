@@ -15,11 +15,11 @@ class AuthUserService {
       },
     });
 
-    if (!user) throw new Error('Email incorreto');
+    if (!user) throw new Error('Usuário não existe');
 
     const passwordMatch = await compare(password, user.password);
 
-    if (!passwordMatch) throw new Error('Senha incorreta');
+    if (!passwordMatch) throw new Error('Email/Senha incorreta');
 
     const token = sign(
       {
@@ -30,7 +30,7 @@ class AuthUserService {
       {
         subject: user.id,
         expiresIn: '30d',
-      }
+      },
     );
 
     return {
