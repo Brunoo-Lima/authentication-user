@@ -14,7 +14,9 @@ const User = () => {
         <span className={styles.user}> {userData.name}!</span>
       </h1>
 
-      <Button onClick={userLogout}>Sair</Button>
+      <div className={styles.btnContainer}>
+        <Button onClick={userLogout}>Sair</Button>
+      </div>
     </div>
   );
 };

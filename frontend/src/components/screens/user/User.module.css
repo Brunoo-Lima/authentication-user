@@ -11,3 +11,12 @@
   text-transform: capitalize;
   font-weight: 100;
 }
+
+.btnContainer {
+  margin-top: 2rem;
+  width: 100px;
+}
+
+.btnContainer button {
+  border-radius: 9999px;
+}
