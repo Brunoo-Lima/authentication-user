@@ -1,8 +1,8 @@
 import { prisma } from '../../../lib/prisma';
 
 export class PostgresVerifyEmailRepository {
-    async execute(token: string, user_id: string) {
-        return await prisma.$transaction([
+    async execute(token: string, user_id: string): Promise<void> {
+        await prisma.$transaction([
             prisma.emailVerification.update({
                 where: {
                     token,

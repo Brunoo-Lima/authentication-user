@@ -1,8 +1,6 @@
-// src/repositories/prisma/PrismaGetEmailVerificationByTokenRepository.ts
-
 import { prisma } from '../../../lib/prisma';
 
-export class PrismaGetEmailVerificationByTokenRepository {
+export class PostgresGetEmailVerificationByTokenRepository {
     async execute(token: string) {
         return await prisma.emailVerification.findUnique({
             where: { token },
