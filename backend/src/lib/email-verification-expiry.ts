@@ -1,0 +1,1 @@
+export const EMAIL_VERIFICATION_EXPIRY_MS = 1000 * 60 * 60 * 24; // 24h
