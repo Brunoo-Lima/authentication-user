@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import styles from './Register.module.css';
-import Input from './../../form/Input';
-import Button from './../../form/Button';
+import Input from '../../form/Input';
+import Button from '../../form/Button';
 
 import { UserContext } from '../../../UserContext';
 import { Link } from 'react-router-dom';

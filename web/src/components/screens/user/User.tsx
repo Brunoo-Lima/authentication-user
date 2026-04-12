@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { UserContext } from '../../../UserContext';
 import styles from './User.module.css';
 import Button from '../../form/Button';
-import Head from './../helper/Head';
+import Head from '../helper/Head';
 
 const User = () => {
   const context = useContext(UserContext);
