@@ -3,7 +3,7 @@ import {
     PostgresGetEmailVerificationByTokenRepository,
     PostgresVerifyEmailRepository,
 } from '../../repositories/postgres';
-import { VerifyEmailUseCase } from '../../use-cases/email/verify-email';
+import { VerifyEmailUseCase } from '../../use-cases/';
 
 export const makeVerifyEmail = () => {
     const getEmailVerificationByTokenRepository =

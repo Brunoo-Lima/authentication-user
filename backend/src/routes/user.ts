@@ -3,7 +3,7 @@ import { makeCreateUserController } from '../factories/controllers';
 
 const userRoutes: IRouter = Router();
 
-userRoutes.post('/users', async (request: Request, response: Response) => {
+userRoutes.post('/', async (request: Request, response: Response) => {
     const createUserController = makeCreateUserController();
     const { statusCode, body } = await createUserController.execute(request);
 
