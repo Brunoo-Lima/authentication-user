@@ -7,7 +7,3 @@ export interface ICreateUserRepository {
 export interface IGetUserByEmailRepository {
     execute(email: string): Promise<IUser | null>;
 }
-
-export interface ICreateEmailVerificationRepository {
-    execute(user_id: string, token: string, expires_at: Date): Promise<void>;
-}
