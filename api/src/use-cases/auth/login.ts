@@ -1,13 +1,18 @@
 import jwt from 'jsonwebtoken';
-import bcrypt from 'bcryptjs';
 import { InvalidPasswordError, UserNotFoundError } from '../../errors';
 import { IGetUserByEmailRepository } from '../../interfaces/repositories';
+import { IPasswordComparatorAdapter } from '../../interfaces/adapters';
 
 export class LoginUseCase {
     private getUserByEmailRepository: IGetUserByEmailRepository;
+    private passwordComparatorAdapter: IPasswordComparatorAdapter;
 
-    constructor(getUserByEmailRepository: IGetUserByEmailRepository) {
+    constructor(
+        getUserByEmailRepository: IGetUserByEmailRepository,
+        passwordComparatorAdapter: IPasswordComparatorAdapter,
+    ) {
         this.getUserByEmailRepository = getUserByEmailRepository;
+        this.passwordComparatorAdapter = passwordComparatorAdapter;
     }
 
     async execute(email: string, password: string) {
@@ -17,13 +22,14 @@ export class LoginUseCase {
             throw new UserNotFoundError();
         }
 
-        const isValidPassword = await bcrypt.compare(password, user.password);
+        const isValidPassword = await this.passwordComparatorAdapter.execute(
+            password,
+            user.password,
+        );
 
         if (!isValidPassword) {
             throw new InvalidPasswordError();
         }
-
-        console.log('chegou aqui', user);
 
         const tokens = {
             accessToken: jwt.sign(
