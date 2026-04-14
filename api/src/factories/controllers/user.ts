@@ -1,4 +1,9 @@
-import { IdGeneratorAdapter, PasswordHashAdapter } from '../../adapters';
+import {
+    EmailAdapter,
+    IdGeneratorAdapter,
+    PasswordHashAdapter,
+    TokenEmailGeneratorAdapter,
+} from '../../adapters';
 import {
     CreateUserController,
     DeleteUserController,
@@ -8,6 +13,7 @@ import {
 import {
     PostgresCreateUserRepository,
     PostgresDeleteUserRepository,
+    PostgresEmailVerificationRepository,
     PostgresGetUserByEmailRepository,
     PostgresGetUserByIdRepository,
     PostgresUpdateUserRepository,
@@ -24,19 +30,19 @@ export const makeCreateUserController = () => {
     const getUserByEmailRepository = new PostgresGetUserByEmailRepository();
     const passwordHashAdapter = new PasswordHashAdapter();
     const idGeneratorAdapter = new IdGeneratorAdapter();
-    // const tokenGeneratorAdapter = new TokenGeneratorAdapter();
-    // const createEmailVerificationRepository =
-    //     new PostgresEmailVerificationRepository();
-    // const emailAdapter = new EmailAdapter();
+    const tokenEmailGeneratorAdapter = new TokenEmailGeneratorAdapter();
+    const createEmailVerificationRepository =
+        new PostgresEmailVerificationRepository();
+    const emailAdapter = new EmailAdapter();
 
     const createUserUseCase = new CreateUserUseCase(
         getUserByEmailRepository,
         createUserRepository,
         passwordHashAdapter,
         idGeneratorAdapter,
-        // tokenGeneratorAdapter,
-        // createEmailVerificationRepository,
-        // emailAdapter,
+        tokenEmailGeneratorAdapter,
+        createEmailVerificationRepository,
+        emailAdapter,
     );
 
     const createUserController = new CreateUserController(createUserUseCase);
