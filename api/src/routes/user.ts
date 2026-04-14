@@ -3,6 +3,7 @@ import {
     makeCreateUserController,
     makeDeleteUserController,
     makeGetUserByIdController,
+    makeUpdateUserController,
 } from '../factories/controllers';
 
 const userRoutes: IRouter = Router();
@@ -20,6 +21,17 @@ userRoutes.get('/me/:userId', async (request: Request, response: Response) => {
 
     return response.status(statusCode).send(body);
 });
+
+userRoutes.patch(
+    '/me/:userId',
+    async (request: Request, response: Response) => {
+        const updateUserController = makeUpdateUserController();
+        const { statusCode, body } =
+            await updateUserController.execute(request);
+
+        return response.status(statusCode).send(body);
+    },
+);
 
 userRoutes.delete(
     '/me/:userId',
