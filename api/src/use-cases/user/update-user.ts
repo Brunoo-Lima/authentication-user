@@ -1,32 +1,35 @@
 import { IUpdateUser } from '../../@types/IUser';
-import { UserNotFoundError } from '../../errors';
-import {
-    IGetUserByIdRepository,
-    IUpdateUserRepository,
-} from '../../interfaces/repositories';
+import { IPasswordHashAdapter } from '../../interfaces/adapters';
+import { IUpdateUserRepository } from '../../interfaces/repositories';
 
 export class UpdateUserUseCase {
     private updateUserRepository: IUpdateUserRepository;
-    private getUserByIdRepository: IGetUserByIdRepository;
+    private passwordHashAdapter: IPasswordHashAdapter;
 
     constructor(
         updateUserRepository: IUpdateUserRepository,
-        getUserByIdRepository: IGetUserByIdRepository,
+        passwordHashAdapter: IPasswordHashAdapter,
     ) {
         this.updateUserRepository = updateUserRepository;
-        this.getUserByIdRepository = getUserByIdRepository;
+        this.passwordHashAdapter = passwordHashAdapter;
     }
 
     async execute(userId: string, updateUserParams: IUpdateUser) {
-        const user = await this.getUserByIdRepository.execute(userId);
+        const user = { ...updateUserParams };
 
-        if (!user) {
-            throw new UserNotFoundError(userId);
+        if (updateUserParams.password) {
+            const hashedPassword = await this.passwordHashAdapter.execute(
+                updateUserParams.password,
+            );
+
+            user.password = hashedPassword;
         }
 
-        return await this.updateUserRepository.execute(
+        const updateUser = await this.updateUserRepository.execute(
             userId,
-            updateUserParams,
+            user,
         );
+
+        return updateUser;
     }
 }
