@@ -1,4 +1,4 @@
-import type { IUser } from '../../@types/IUser';
+import type { IUpdateUser, IUser } from '../../@types/IUser';
 
 export interface ICreateUserRepository {
     execute(user: IUser): Promise<IUser>;
@@ -14,4 +14,11 @@ export interface IGetUserByIdRepository {
 
 export interface IDeleteUserRepository {
     execute(userId: string): Promise<IUser | null>;
+}
+
+export interface IUpdateUserRepository {
+    execute(
+        userId: string,
+        updateUserParams: IUpdateUser,
+    ): Promise<IUpdateUser | null>;
 }
