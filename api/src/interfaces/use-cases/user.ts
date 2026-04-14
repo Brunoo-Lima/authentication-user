@@ -7,3 +7,7 @@ export interface ICreateUserUseCase {
 export interface IGetUserByIdUseCase {
     execute(userId: string): Promise<IUser | null>;
 }
+
+export interface IDeleteUserUseCase {
+    execute(userId: string): Promise<IUser | null>;
+}
