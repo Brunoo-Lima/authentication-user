@@ -11,7 +11,7 @@ export class EmailAdapter {
     });
 
     async sendVerificationEmail(to: string, token: string): Promise<void> {
-        const link = `${process.env.APP_URL}/verify-email?token=${token}`;
+        const link = `${process.env.APP_URL}/api/email/verify?token=${token}`;
 
         await this.transporter.sendMail({
             from: `"App" <${process.env.SMTP_USER}>`,

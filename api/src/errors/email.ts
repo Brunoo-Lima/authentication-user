@@ -18,3 +18,10 @@ export class EmailAlreadyVerifiedError extends Error {
         this.name = 'EmailAlreadyVerifiedError';
     }
 }
+
+export class EmailNotVerifiedError extends Error {
+    constructor() {
+        super('Email nao verificado');
+        this.name = 'EmailNotVerifiedError';
+    }
+}
