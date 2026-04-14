@@ -10,6 +10,20 @@ export const serverError = () => ({
     },
 });
 
+export const unauthorized = () => ({
+    statusCode: 401,
+    body: {
+        message: 'Unauthorized',
+    },
+});
+
+export const forbidden = () => ({
+    statusCode: 403,
+    body: {
+        message: 'Forbidden',
+    },
+});
+
 export const ok = <T>(body: T) => ({
     statusCode: 200,
     body,
