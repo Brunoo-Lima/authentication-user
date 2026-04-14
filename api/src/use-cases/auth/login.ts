@@ -1,18 +1,23 @@
-import jwt from 'jsonwebtoken';
 import { InvalidPasswordError, UserNotFoundError } from '../../errors';
 import { IGetUserByEmailRepository } from '../../interfaces/repositories';
-import { IPasswordComparatorAdapter } from '../../interfaces/adapters';
+import {
+    IPasswordComparatorAdapter,
+    ITokensGeneratorAdapter,
+} from '../../interfaces/adapters';
 
 export class LoginUseCase {
     private getUserByEmailRepository: IGetUserByEmailRepository;
     private passwordComparatorAdapter: IPasswordComparatorAdapter;
+    private tokensGeneratorAdapter: ITokensGeneratorAdapter;
 
     constructor(
         getUserByEmailRepository: IGetUserByEmailRepository,
         passwordComparatorAdapter: IPasswordComparatorAdapter,
+        tokensGeneratorAdapter: ITokensGeneratorAdapter,
     ) {
         this.getUserByEmailRepository = getUserByEmailRepository;
         this.passwordComparatorAdapter = passwordComparatorAdapter;
+        this.tokensGeneratorAdapter = tokensGeneratorAdapter;
     }
 
     async execute(email: string, password: string) {
@@ -31,26 +36,8 @@ export class LoginUseCase {
             throw new InvalidPasswordError();
         }
 
-        const tokens = {
-            accessToken: jwt.sign(
-                { userId: user.id },
-                process.env.JWT_ACCESS_TOKEN_SECRET as string,
-                {
-                    expiresIn: '15m',
-                },
-            ),
-            refreshToken: jwt.sign(
-                { userId: user.id },
-                process.env.JWT_REFRESH_TOKEN_SECRET as string,
-                {
-                    expiresIn: '30d',
-                },
-            ),
-        };
+        const tokens = this.tokensGeneratorAdapter.execute(user.id);
 
-        return {
-            ...user,
-            tokens,
-        };
+        return { ...user, tokens };
     }
 }
