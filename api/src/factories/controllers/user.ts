@@ -63,10 +63,12 @@ export const makeDeleteUserController = () => {
 };
 
 export const makeUpdateUserController = () => {
+    const getUserByEmailRepository = new PostgresGetUserByEmailRepository();
     const passwordHashAdapter = new PasswordHashAdapter();
     const updateUserRepository = new PostgresUpdateUserRepository();
     const updateUserUseCase = new UpdateUserUseCase(
         updateUserRepository,
+        getUserByEmailRepository,
         passwordHashAdapter,
     );
 

@@ -1,7 +1,14 @@
 import { type Request } from 'express';
 import { IUpdateUserUseCase } from '../../interfaces/use-cases';
-import { badRequest, ok, serverError, userNotFoundResponse } from '../helpers';
-import { UserNotFoundError } from '../../errors';
+import {
+    badRequest,
+    checkIfIdIsValid,
+    invalidIdResponse,
+    ok,
+    serverError,
+    userNotFoundResponse,
+} from '../helpers';
+import { EmailAlreadyInUseError, UserNotFoundError } from '../../errors';
 import { ZodError } from 'zod';
 import { updateUserSchema } from '../../schemas';
 
@@ -17,6 +24,12 @@ export class UpdateUserController {
             const userId = request.params.userId as string;
             const params = request.body;
 
+            const isIdValid = checkIfIdIsValid(userId);
+
+            if (!isIdValid) {
+                return invalidIdResponse();
+            }
+
             await updateUserSchema.parseAsync(params);
 
             const user = await this.updateUserUseCase.execute(userId, params);
@@ -27,6 +40,10 @@ export class UpdateUserController {
 
             if (error instanceof UserNotFoundError) {
                 return userNotFoundResponse();
+            }
+
+            if (error instanceof EmailAlreadyInUseError) {
+                return badRequest({ message: error.message });
             }
 
             if (error instanceof ZodError) {
