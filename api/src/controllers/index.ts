@@ -4,3 +4,5 @@ export * from './user/delete-user';
 export * from './user/update-user';
 
 export * from './email/verify-email';
+
+export * from './auth/login';
