@@ -1,4 +1,4 @@
-import { ITokens } from '../../@types/IAuth';
+import { IDecodedToken, ITokens } from '../../@types/IAuth';
 
 export interface IIdGeneratorAdapter {
     execute(): string;
@@ -22,4 +22,8 @@ export interface ITokenEmailGeneratorAdapter {
 
 export interface ITokensGeneratorAdapter {
     execute(userId: string): ITokens;
+}
+
+export interface ITokenVerifierAdapter {
+    execute(token: string, secret: string): IDecodedToken;
 }

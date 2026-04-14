@@ -3,3 +3,5 @@ export * from './id-generator';
 export * from './email';
 export * from './token-email-generator';
 export * from './password-comparator';
+export * from './tokens-generator';
+export * from './token-verifier';
