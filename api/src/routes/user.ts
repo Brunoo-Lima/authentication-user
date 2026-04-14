@@ -1,6 +1,7 @@
 import { Router, type IRouter, type Request, type Response } from 'express';
 import {
     makeCreateUserController,
+    makeDeleteUserController,
     makeGetUserByIdController,
 } from '../factories/controllers';
 
@@ -19,5 +20,16 @@ userRoutes.get('/me/:userId', async (request: Request, response: Response) => {
 
     return response.status(statusCode).send(body);
 });
+
+userRoutes.delete(
+    '/me/:userId',
+    async (request: Request, response: Response) => {
+        const deleteUserController = makeDeleteUserController();
+        const { statusCode, body } =
+            await deleteUserController.execute(request);
+
+        return response.status(statusCode).send(body);
+    },
+);
 
 export { userRoutes };
