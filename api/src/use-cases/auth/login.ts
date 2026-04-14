@@ -1,4 +1,8 @@
-import { InvalidPasswordError, UserNotFoundError } from '../../errors';
+import {
+    EmailNotVerifiedError,
+    InvalidPasswordError,
+    UserNotFoundError,
+} from '../../errors';
 import { IGetUserByEmailRepository } from '../../interfaces/repositories';
 import {
     IPasswordComparatorAdapter,
@@ -34,6 +38,10 @@ export class LoginUseCase {
 
         if (!isValidPassword) {
             throw new InvalidPasswordError();
+        }
+
+        if (!user.email_verified) {
+            throw new EmailNotVerifiedError();
         }
 
         const tokens = this.tokensGeneratorAdapter.execute(user.id);
