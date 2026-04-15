@@ -9,4 +9,7 @@ export * from './email/get-email-verification-by-token';
 export * from './email/verify-email';
 
 export * from './session/register-session';
+
 export * from './auth/forgot-password';
+export * from './auth/mark-password-reset-as-used';
+export * from './auth/password-reset-by-token';

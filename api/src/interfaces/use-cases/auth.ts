@@ -18,3 +18,7 @@ export interface IRefreshTokenUseCase {
 export interface IForgotPasswordUseCase {
     execute(email: string): Promise<void>;
 }
+
+export interface IResetPasswordUseCase {
+    execute(token: string, password: string): Promise<void>;
+}

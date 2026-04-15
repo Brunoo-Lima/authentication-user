@@ -19,6 +19,6 @@ export interface IDeleteUserRepository {
 export interface IUpdateUserRepository {
     execute(
         userId: string,
-        updateUserParams: IUpdateUser,
+        updateUserParams: Partial<IUpdateUser>,
     ): Promise<IUpdateUser | null>;
 }
