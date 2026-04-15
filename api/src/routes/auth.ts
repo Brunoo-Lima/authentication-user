@@ -3,6 +3,7 @@ import {
     makeForgotPasswordController,
     makeLoginController,
     makeRefreshTokenController,
+    makeResetPasswordController,
 } from '../factories/controllers';
 
 const authRoutes: IRouter = Router();
@@ -31,6 +32,17 @@ authRoutes.post(
         const forgotPasswordController = makeForgotPasswordController();
         const { statusCode, body } =
             await forgotPasswordController.execute(request);
+
+        return response.status(statusCode).send(body);
+    },
+);
+
+authRoutes.post(
+    '/reset-password',
+    async (request: Request, response: Response) => {
+        const resetPasswordController = makeResetPasswordController();
+        const { statusCode, body } =
+            await resetPasswordController.execute(request);
 
         return response.status(statusCode).send(body);
     },

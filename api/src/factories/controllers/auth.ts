@@ -1,6 +1,7 @@
 import {
     EmailAdapter,
     PasswordComparatorAdapter,
+    PasswordHashAdapter,
     TokenEmailGeneratorAdapter,
     TokensGeneratorAdapter,
     TokenVerifierAdapter,
@@ -9,16 +10,21 @@ import {
     ForgotPasswordController,
     LoginController,
     RefreshTokenController,
+    ResetPasswordController,
 } from '../../controllers';
 import {
     PostgresForgotPasswordRepository,
+    PostgresGetPasswordResetByTokenRepository,
     PostgresGetUserByEmailRepository,
+    PostgresMarkPasswordResetAsUsedRepository,
     PostgresRegisterSessionRepository,
+    PostgresUpdateUserRepository,
 } from '../../repositories/postgres';
 import {
     ForgotPasswordUseCase,
     LoginUseCase,
     RefreshTokenUseCase,
+    ResetPasswordUseCase,
 } from '../../use-cases';
 
 export const makeLoginController = () => {
@@ -71,4 +77,26 @@ export const makeForgotPasswordController = () => {
     );
 
     return forgotPasswordController;
+};
+
+export const makeResetPasswordController = () => {
+    const getPasswordResetByTokenRepository =
+        new PostgresGetPasswordResetByTokenRepository();
+    const passwordHashAdapter = new PasswordHashAdapter();
+    const updateUserRepository = new PostgresUpdateUserRepository();
+    const markPasswordResetAsUsedRepository =
+        new PostgresMarkPasswordResetAsUsedRepository();
+
+    const resetPasswordUseCase = new ResetPasswordUseCase(
+        getPasswordResetByTokenRepository,
+        passwordHashAdapter,
+        updateUserRepository,
+        markPasswordResetAsUsedRepository,
+    );
+
+    const resetPasswordController = new ResetPasswordController(
+        resetPasswordUseCase,
+    );
+
+    return resetPasswordController;
 };
