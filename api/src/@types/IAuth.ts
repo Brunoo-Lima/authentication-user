@@ -13,3 +13,10 @@ export type IAuth = IUser & {
 export type IDecodedToken = JwtPayload & {
     userId: string;
 };
+
+export interface IForgotPassword {
+    token: string;
+    expires_at: Date;
+    used_at?: Date | null;
+    user_id: string;
+}

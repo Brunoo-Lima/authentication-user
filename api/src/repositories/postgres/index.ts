@@ -7,3 +7,6 @@ export * from './user/update-user';
 export * from './email/email-verification';
 export * from './email/get-email-verification-by-token';
 export * from './email/verify-email';
+
+export * from './session/register-session';
+export * from './auth/forgot-password';
