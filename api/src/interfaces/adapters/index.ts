@@ -6,6 +6,7 @@ export interface IIdGeneratorAdapter {
 
 export interface IEmailAdapter {
     sendVerificationEmail(to: string, token: string): Promise<void>;
+    sendPasswordResetEmail(to: string, token: string): Promise<void>;
 }
 
 export interface IPasswordComparatorAdapter {

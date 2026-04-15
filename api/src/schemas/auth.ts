@@ -20,3 +20,14 @@ export const refreshTokenSchema = z.object({
         error: 'Refresh token is required',
     }),
 });
+
+export const forgotPasswordSchema = z.object({
+    email: z
+        .email({
+            message: 'Invalid email. Please enter a valid email',
+        })
+        .trim()
+        .min(1, {
+            error: 'Email is required',
+        }),
+});
