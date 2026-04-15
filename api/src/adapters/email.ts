@@ -20,4 +20,20 @@ export class EmailAdapter {
             html: `<p>Clique para verificar: <a href="${link}">${link}</a></p>`,
         });
     }
+
+    async sendPasswordResetEmail(to: string, token: string): Promise<void> {
+        const link = `${process.env.FRONTEND_URL}/reset-password?token=${token}`;
+
+        await this.transporter.sendMail({
+            from: `"App" <${process.env.SMTP_USER}>`,
+            to,
+            subject: 'Redefina sua senha',
+            html: `
+            <p>Recebemos uma solicitação para redefinir sua senha.</p>
+            <p>Clique no link abaixo para continuar:</p>
+            <p><a href="${link}">${link}</a></p>
+            <p>Se você não solicitou isso, ignore este e-mail.</p>
+        `,
+        });
+    }
 }
