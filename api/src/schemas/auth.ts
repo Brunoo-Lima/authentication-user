@@ -31,3 +31,12 @@ export const forgotPasswordSchema = z.object({
             error: 'Email is required',
         }),
 });
+
+export const resetPasswordSchema = z.object({
+    token: z.string().trim().min(1, {
+        error: 'Token is required',
+    }),
+    password: z.string().trim().min(6, {
+        error: 'Password must be at least 6 characters',
+    }),
+});

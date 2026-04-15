@@ -9,3 +9,4 @@ export * from './auth/login';
 export * from './auth/refresh-token';
 
 export * from './auth/forgot-password';
+export * from './auth/reset-password';

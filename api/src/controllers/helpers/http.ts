@@ -10,10 +10,10 @@ export const serverError = () => ({
     },
 });
 
-export const unauthorized = () => ({
+export const unauthorized = (message?: string) => ({
     statusCode: 401,
     body: {
-        message: 'Unauthorized',
+        message: message || 'Unauthorized',
     },
 });
 
