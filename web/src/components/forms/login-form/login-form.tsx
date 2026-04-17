@@ -47,13 +47,15 @@ export const LoginForm = () => {
         error={errors?.password}
       />
 
-      <div className={s.containerForgetPass}>
-        <Link to="/*" className={s.forgetPass}>
+      <div className={s.forgot__password__container}>
+        <Link to="/*" className={s.forgot__password}>
           Esqueceu a senha?
         </Link>
       </div>
 
-      <Button type="submit">Entrar</Button>
+      <Button type="submit" className={s.button__submit} variant="default">
+        Entrar
+      </Button>
 
       <p className={s.register}>
         Não possui conta? <Link to="/register">Registrar</Link>

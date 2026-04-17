@@ -40,7 +40,7 @@ export const ErrorMessage = ({
   message,
 }: IErrorMessageProps) => {
   return (
-    <small className={`${s.input__error} ${classNameCustom}`}>
+    <small className={`${s.error} ${classNameCustom}`}>
       {message as string}
     </small>
   );

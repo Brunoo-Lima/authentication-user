@@ -1,4 +1,4 @@
-.container {
+.login_wrapper {
   display: grid;
   grid-template-columns: 1fr 1fr;
   align-items: center;
@@ -6,62 +6,64 @@
   background: var(--tertiary-color);
 }
 
-.sideLeft {
+.background__wrapper {
   background: #ffffff !important;
   height: 100%;
   display: flex;
   align-items: center;
 }
 
-.imgLogin {
+.background__login {
   width: 100%;
   height: 600px;
 }
 
-.sideRight {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 2.5rem;
-}
-
 .title {
   font-size: 2.5rem;
-  margin-bottom: 1rem;
 }
 
-.containerForgetPass {
-  display: block;
-  text-align: right;
-  margin-bottom: 0.25rem;
+.description {
+  font-size: 1rem;
+  color: var(--color-neutral-80);
 }
 
-.forgetPass {
-  font-size: 0.75rem;
-  color: var(--secondary-color);
+.form__wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 2.5rem;
+
+  width: 600px;
+  margin: 0 auto;
 }
 
-.register {
-  text-align: center;
-  margin-top: 0.75rem;
-  font-size: 0.875rem;
-}
-
-:is(.register a:hover, .forgetPass:hover) {
-  text-decoration: underline;
+@media (max-width: 1068px) {
+  .form__wrapper {
+    width: 100%;
+    padding: 1.5rem;
+  }
 }
 
 @media (max-width: 768px) {
-  .container {
+  .login_wrapper {
     grid-template-columns: 1fr;
   }
-  .sideLeft {
+
+  .background__wrapper {
     display: none;
+  }
+
+  .form__wrapper {
+    width: 500px;
   }
 }
 
-@media (max-width: 450px) {
-  .sideRight {
-    padding: 0px;
+@media (max-width: 568px) {
+  .title {
+    font-size: 2rem;
+  }
+  .form__wrapper {
+    padding: 0 1.5rem;
+    width: 100%;
   }
 }

@@ -7,7 +7,7 @@
 .label {
   font-size: 1rem;
   font-weight: 400;
-  color: var(--color-white);
+  color: var(--primary-color);
 }
 
 .input__wrapper {
@@ -18,8 +18,8 @@
   align-items: center;
 
   border-radius: 0.5rem;
-  border: 1px solid var(--second-color);
-  background-color: var(--color-black-100);
+  border: 1px solid var(--tertiary-color);
+  background-color: var(--color-white);
 
   transition: all 0.2s ease-in-out;
 }
@@ -30,12 +30,8 @@
 
 .input__field {
   flex: 1;
-  padding: 0.6875rem 1rem;
+  padding: 0.75rem 1rem;
   outline: none;
-
-  border: none;
-  background: transparent;
-  border-radius: 0.5rem;
 
   border: none;
   background: transparent;
@@ -43,13 +39,14 @@
 
   font-size: 0.875rem;
   font-weight: 400;
-  color: var(--color-white);
+  color: var(--primary-color);
 
   transition: border-color 0.2s ease;
 }
 
 .input__field::placeholder {
-  color: var(--color-gray-40);
+  color: var(--primary-color);
+  opacity: 0.7;
 }
 
 .input__field:focus-visible {
