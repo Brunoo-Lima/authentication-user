@@ -9,6 +9,15 @@ export class PostgresDeleteUserRepository {
                 where: {
                     id: userId,
                 },
+                select: {
+                    id: true,
+                    name: true,
+                    email: true,
+                    email_verified: true,
+                    is_active: true,
+                    created_at: true,
+                    updated_at: true,
+                },
             });
         } catch (error) {
             if (error instanceof PrismaClientKnownRequestError) {
