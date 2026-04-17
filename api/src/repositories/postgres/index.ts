@@ -9,6 +9,8 @@ export * from './email/get-email-verification-by-token';
 export * from './email/verify-email';
 
 export * from './session/register-session';
+export * from './session/get-session-by-refresh-token';
+export * from './session/update-session-refresh-token';
 
 export * from './auth/forgot-password';
 export * from './auth/mark-password-reset-as-used';
