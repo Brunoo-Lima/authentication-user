@@ -1,4 +1,5 @@
 import jwt from 'jsonwebtoken';
+import { REFRESH_TOKEN_EXPIRY_MS } from '../lib/auth-session-expiry';
 
 export class TokensGeneratorAdapter {
     execute(userId: string) {
@@ -11,7 +12,7 @@ export class TokensGeneratorAdapter {
             refreshToken: jwt.sign(
                 { userId },
                 process.env.JWT_REFRESH_TOKEN_SECRET as string,
-                { expiresIn: '30d' },
+                { expiresIn: Math.floor(REFRESH_TOKEN_EXPIRY_MS / 1000) },
             ),
         };
     }
