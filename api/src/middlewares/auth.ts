@@ -27,6 +27,15 @@ export const auth = (
         next();
     } catch (error) {
         console.error(error);
+
+        // Distingue token expirado de token inválido
+        if (error instanceof jwt.TokenExpiredError) {
+            return response.status(401).send({
+                message: 'Token expired',
+                code: 'TOKEN_EXPIRED', // cliente usa esse code para chamar /auth/refresh
+            });
+        }
+
         return response.status(401).send({ message: 'Unauthorized' });
     }
 };
