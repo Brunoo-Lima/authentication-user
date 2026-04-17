@@ -10,6 +10,7 @@ export class PostgresGetUserByEmailRepository {
                 id: true,
                 name: true,
                 email: true,
+                password: true,
                 email_verified: true,
                 is_active: true,
                 created_at: true,

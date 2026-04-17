@@ -1,20 +1,20 @@
-import { IUpdateUser, IUser } from '../../@types/IUser';
+import { IUpdateUser, IUser, IUserSafe } from '../../@types/IUser';
 
 export interface ICreateUserUseCase {
-    execute(user: IUser): Promise<IUser>;
+    execute(user: IUser): Promise<IUserSafe>;
 }
 
 export interface IGetUserByIdUseCase {
-    execute(userId: string): Promise<IUser | null>;
+    execute(userId: string): Promise<IUserSafe | null>;
 }
 
 export interface IDeleteUserUseCase {
-    execute(userId: string): Promise<IUser | null>;
+    execute(userId: string): Promise<IUserSafe | null>;
 }
 
 export interface IUpdateUserUseCase {
     execute(
         userId: string,
         updateUserParams: IUpdateUser,
-    ): Promise<IUpdateUser | null>;
+    ): Promise<IUserSafe | null>;
 }
