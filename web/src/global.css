@@ -8,10 +8,28 @@
   --primary-color: #302d28;
   --secondary-color: #e48f4f;
   --tertiary-color: #e9e9e9;
+
+  --color-white: #ffffff;
+
+  --color-neutral-80: #333333d3;
+
+  --link-color: #4f94e4;
+
+  --error: #f44336;
 }
 
 a {
   text-decoration: none;
+  font-family: inherit;
+}
+
+input {
+  font-family: inherit;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
 }
 
 img {
