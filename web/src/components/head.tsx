@@ -5,7 +5,7 @@ interface HeadComponent {
   description?: string;
 }
 
-const Head = (props: HeadComponent) => {
+export const Head = (props: HeadComponent) => {
   useEffect(() => {
     document.title = props.title;
     document
@@ -15,5 +15,3 @@ const Head = (props: HeadComponent) => {
 
   return <></>;
 };
-
-export default Head;
