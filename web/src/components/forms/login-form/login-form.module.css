@@ -1,0 +1,67 @@
+.container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  min-height: 100vh;
+  background: var(--tertiary-color);
+}
+
+.sideLeft {
+  background: #ffffff !important;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.imgLogin {
+  width: 100%;
+  height: 600px;
+}
+
+.sideRight {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2.5rem;
+}
+
+.title {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.containerForgetPass {
+  display: block;
+  text-align: right;
+  margin-bottom: 0.25rem;
+}
+
+.forgetPass {
+  font-size: 0.75rem;
+  color: var(--secondary-color);
+}
+
+.register {
+  text-align: center;
+  margin-top: 0.75rem;
+  font-size: 0.875rem;
+}
+
+:is(.register a:hover, .forgetPass:hover) {
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .container {
+    grid-template-columns: 1fr;
+  }
+  .sideLeft {
+    display: none;
+  }
+}
+
+@media (max-width: 450px) {
+  .sideRight {
+    padding: 0px;
+  }
+}
