@@ -1,6 +1,5 @@
 import s from './login-form.module.css';
 import * as Input from '../../ui/input/input';
-import { Link } from 'react-router-dom';
 import { Button } from '../../ui/button/button';
 import { InputPassword } from '../../ui/input/input-password/input-password';
 import { useForm } from 'react-hook-form';
@@ -53,9 +52,12 @@ export const LoginForm = ({ setStep }: ILoginFormProps) => {
       />
 
       <div className={s.forgot__password__container}>
-        <Link to="/*" className={s.forgot__password}>
+        <span
+          className={s.forgot__password}
+          onClick={() => setStep('forgot-password')}
+        >
           Esqueceu a senha?
-        </Link>
+        </span>
       </div>
 
       <Button type="submit" className={s.button__submit} variant="default">

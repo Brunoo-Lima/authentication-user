@@ -7,6 +7,7 @@ import { useState } from 'react';
 
 import { Register } from './register/register';
 import { Login } from './login/login';
+import { ForgotPassword } from './forgot-password/forgot-password';
 
 export type IStep = 'login' | 'register' | 'forgot-password';
 export const Home = () => {
@@ -28,6 +29,7 @@ export const Home = () => {
         <div className={s.form__wrapper}>
           {step === 'login' && <Login setStep={setStep} />}
           {step === 'register' && <Register setStep={setStep} />}
+          {step === 'forgot-password' && <ForgotPassword setStep={setStep} />}
         </div>
       </section>
     </>

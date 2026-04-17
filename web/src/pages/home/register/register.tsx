@@ -19,6 +19,7 @@ export const Register = ({ setStep }: IRegisterProps) => {
         >
           <ChevronLeftIcon size={24} color="#302d28" />
         </Button>
+
         <h1 className={s.title}>Dados Pessoais</h1>
       </div>
       <RegisterForm />
