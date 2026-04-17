@@ -42,13 +42,14 @@
 }
 
 .ghost {
-  background-color: var(--color-gray-60);
-  border-color: var(--color-gray-60);
-  color: var(--color-white);
+  background-color: var(--color-white);
+  border-color: var(--tertiary-color);
+  color: var(--primary-color);
 }
 
 .ghost:hover {
-  background-color: var(--color-gray);
+  background-color: var(--tertiary-color);
+  border-color: var(--color-white);
 }
 
 .outline {
