@@ -14,10 +14,12 @@ import {
 } from '../../controllers';
 import {
     PostgresForgotPasswordRepository,
+    PostgresGetSessionByRefreshTokenRepository,
     PostgresGetPasswordResetByTokenRepository,
     PostgresGetUserByEmailRepository,
     PostgresMarkPasswordResetAsUsedRepository,
     PostgresRegisterSessionRepository,
+    PostgresUpdateSessionRefreshTokenRepository,
     PostgresUpdateUserRepository,
 } from '../../repositories/postgres';
 import {
@@ -47,9 +49,15 @@ export const makeLoginController = () => {
 export const makeRefreshTokenController = () => {
     const tokensGeneratorAdapter = new TokensGeneratorAdapter();
     const tokenVerifierAdapter = new TokenVerifierAdapter();
+    const getSessionByRefreshTokenRepository =
+        new PostgresGetSessionByRefreshTokenRepository();
+    const updateSessionRefreshTokenRepository =
+        new PostgresUpdateSessionRefreshTokenRepository();
     const refreshTokenUseCase = new RefreshTokenUseCase(
         tokensGeneratorAdapter,
         tokenVerifierAdapter,
+        getSessionByRefreshTokenRepository,
+        updateSessionRefreshTokenRepository,
     );
 
     const refreshTokenController = new RefreshTokenController(
