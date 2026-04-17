@@ -1,25 +1,22 @@
-import Login from './components/screens/login/Login';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Register from './components/screens/register/Register';
-import NotFound from './components/screens/helper/NotFound';
-import User from './components/screens/user/User';
-import { UserProvider } from './UserContext';
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import NotFound from './components/not-found/not-found';
+import { AuthProvider } from './context/auth-context';
+import { Login } from './pages/login/login';
+import { User } from './components/screens/user/user';
 
 const App = () => {
   return (
     <>
-      <ToastContainer autoClose={2500} />
       <BrowserRouter>
-        <UserProvider>
+        <AuthProvider>
           <Routes>
             <Route path="/" element={<Login />} />
             <Route path="/user" element={<User />} />
             <Route path="/register" element={<Register />} />
             <Route path="/*" element={<NotFound />} />
           </Routes>
-        </UserProvider>
+        </AuthProvider>
       </BrowserRouter>
     </>
   );
