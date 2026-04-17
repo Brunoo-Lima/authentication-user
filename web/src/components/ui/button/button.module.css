@@ -1,0 +1,62 @@
+.button {
+  border-radius: 0.625rem;
+  background-color: currentColor;
+  border: 1px solid currentColor;
+
+  width: max-content;
+  height: 40px;
+  padding: 1rem 1.25rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+
+  font-size: 1rem;
+  font-weight: 600;
+
+  transition: all 0.3s ease;
+}
+
+button .cancel {
+  background-color: var(--color-white);
+  border-color: var(--color-gray-40);
+  color: var(--color-black-100);
+}
+button .cancel:hover {
+  background-color: var(--color-white-80);
+}
+
+button .default {
+  background-color: var(--primary-color);
+  color: var(--color-black);
+  border-color: var(--primary-color);
+}
+
+button .default:hover {
+  background-color: var(--primary-color-80);
+}
+
+button .default:disabled {
+  opacity: 0.5;
+}
+
+button .ghost {
+  background-color: var(--color-gray-60);
+  border-color: var(--color-gray-60);
+  color: var(--color-white);
+}
+
+button .ghost:hover {
+  background-color: var(--color-gray);
+}
+
+button .outline {
+  background-color: transparent;
+  color: var(--color-white);
+  border-color: var(--color-white);
+}
+
+button .outline:hover {
+  border-color: var(--color-gray-20);
+}
