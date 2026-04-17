@@ -9,8 +9,13 @@ import {
   ILoginFormSchema,
   loginFormSchema,
 } from '../../../validations/login-form-schema';
+import React from 'react';
+import { IStep } from '../../../pages/home/home';
 
-export const LoginForm = () => {
+interface ILoginFormProps {
+  setStep: React.Dispatch<React.SetStateAction<IStep>>;
+}
+export const LoginForm = ({ setStep }: ILoginFormProps) => {
   const {
     register,
     handleSubmit,
@@ -42,7 +47,7 @@ export const LoginForm = () => {
       <InputPassword
         label="Senha"
         placeholder="Digite sua senha"
-        maxLength={8}
+        maxLength={6}
         {...register('password')}
         error={errors?.password}
       />
@@ -58,7 +63,8 @@ export const LoginForm = () => {
       </Button>
 
       <p className={s.register}>
-        Não possui conta? <Link to="/register">Registrar</Link>
+        Não possui conta?{' '}
+        <span onClick={() => setStep('register')}>Registrar</span>
       </p>
     </form>
   );
