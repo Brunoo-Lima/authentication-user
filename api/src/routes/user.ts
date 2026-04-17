@@ -16,40 +16,34 @@ userRoutes.post('/', async (request: Request, response: Response) => {
     return response.status(statusCode).send(body);
 });
 
-userRoutes.get(
-    '/me/:userId',
-    auth,
-    async (request: Request, response: Response) => {
-        const getUserByIdController = makeGetUserByIdController();
-        const { statusCode, body } =
-            await getUserByIdController.execute(request);
+userRoutes.get('/me', auth, async (request: Request, response: Response) => {
+    const getUserByIdController = makeGetUserByIdController();
 
-        return response.status(statusCode).send(body);
-    },
-);
+    request.params.userId = request.userId as string;
 
-userRoutes.patch(
-    '/me/:userId',
-    auth,
-    async (request: Request, response: Response) => {
-        const updateUserController = makeUpdateUserController();
-        const { statusCode, body } =
-            await updateUserController.execute(request);
+    const { statusCode, body } = await getUserByIdController.execute(request);
 
-        return response.status(statusCode).send(body);
-    },
-);
+    return response.status(statusCode).send(body);
+});
 
-userRoutes.delete(
-    '/me/:userId',
-    auth,
-    async (request: Request, response: Response) => {
-        const deleteUserController = makeDeleteUserController();
-        const { statusCode, body } =
-            await deleteUserController.execute(request);
+userRoutes.patch('/me', auth, async (request: Request, response: Response) => {
+    const updateUserController = makeUpdateUserController();
 
-        return response.status(statusCode).send(body);
-    },
-);
+    request.params.userId = request.userId as string;
+
+    const { statusCode, body } = await updateUserController.execute(request);
+
+    return response.status(statusCode).send(body);
+});
+
+userRoutes.delete('/me', auth, async (request: Request, response: Response) => {
+    const deleteUserController = makeDeleteUserController();
+
+    request.params.userId = request.userId as string;
+
+    const { statusCode, body } = await deleteUserController.execute(request);
+
+    return response.status(statusCode).send(body);
+});
 
 export { userRoutes };
