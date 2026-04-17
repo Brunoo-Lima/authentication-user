@@ -1,4 +1,4 @@
-.container {
+.not__found__wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -7,7 +7,7 @@
   background: var(--tertiary-color);
 }
 
-.errorLogo {
+.error__logo {
   width: 500px;
   height: 500px;
   margin: 0 auto;
