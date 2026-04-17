@@ -1,12 +1,12 @@
 import { JwtPayload } from 'jsonwebtoken';
-import { IUser } from './IUser';
+import { IUserSafe } from './IUser';
 
 export type ITokens = {
     accessToken: string;
     refreshToken: string;
 };
 
-export type IAuth = IUser & {
+export type IAuth = IUserSafe & {
     tokens: ITokens;
 };
 

@@ -9,4 +9,6 @@ export interface IUser {
     updated_at: Date;
 }
 
-export type IUpdateUser = Omit<IUser, 'id' | 'created_at'>;
+export type IUserSafe = Omit<IUser, 'password'>;
+
+export type IUpdateUser = Pick<IUser, 'name' | 'email' | 'password'>;

@@ -1,7 +1,7 @@
-import type { IUpdateUser, IUser } from '../../@types/IUser';
+import type { IUpdateUser, IUser, IUserSafe } from '../../@types/IUser';
 
 export interface ICreateUserRepository {
-    execute(user: IUser): Promise<IUser>;
+    execute(user: IUser): Promise<IUserSafe>;
 }
 
 export interface IGetUserByEmailRepository {
@@ -9,16 +9,16 @@ export interface IGetUserByEmailRepository {
 }
 
 export interface IGetUserByIdRepository {
-    execute(userId: string): Promise<IUser | null>;
+    execute(userId: string): Promise<IUserSafe | null>;
 }
 
 export interface IDeleteUserRepository {
-    execute(userId: string): Promise<IUser | null>;
+    execute(userId: string): Promise<IUserSafe | null>;
 }
 
 export interface IUpdateUserRepository {
     execute(
         userId: string,
         updateUserParams: Partial<IUpdateUser>,
-    ): Promise<IUpdateUser | null>;
+    ): Promise<IUserSafe | null>;
 }
