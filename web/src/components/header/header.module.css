@@ -28,3 +28,15 @@
 .nav a.active {
   color: var(--tertiary-color);
 }
+
+@media (max-width: 568px) {
+  .header__wrapper {
+    padding: 0 2rem;
+    justify-content: space-between;
+  }
+
+  .nav {
+    margin: unset;
+    margin-left: auto;
+  }
+}

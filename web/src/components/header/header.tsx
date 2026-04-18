@@ -10,8 +10,8 @@ export const Header = () => {
 
       <nav className={s.nav}>
         <NavLink
-          to="/inicio"
-          className={`${location.pathname === '/inicio' ? s.active : ''}`}
+          to="/dash"
+          className={`${location.pathname === '/dash' ? s.active : ''}`}
         >
           Inicio
         </NavLink>
