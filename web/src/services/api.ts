@@ -38,7 +38,7 @@ interface RetryConfig extends AxiosRequestConfig {
 }
 
 api.interceptors.response.use(
-  (response) => response.data,
+  (response) => response,
 
   async (error) => {
     const originalRequest: RetryConfig = error.config;
