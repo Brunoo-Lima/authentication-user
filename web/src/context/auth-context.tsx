@@ -1,16 +1,13 @@
 import { ReactNode, createContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
-
-interface IUserData {
-  id: string;
-  name: string;
-  email: string;
-}
+import { getUser } from '../services/user';
+import { IUserLogin } from '../@types/IUser';
+import { useUserLogin } from '../services/login';
 
 interface IAuthContextProps {
-  user: IUserData | null;
-  login: (email: string, _password: string) => Promise<void>;
+  user: IUserLogin | null;
+  loginService: (email: string, password: string) => Promise<void>;
   logOut: () => void;
   isAuthenticated: boolean;
   isLoading: boolean;
@@ -26,63 +23,50 @@ export const AuthContext = createContext<IAuthContextProps | undefined>(
 
 export const AuthProvider = ({ children }: IAuthProviderProps) => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [user, setUser] = useState<IUserData | null>(null);
+  const [user, setUser] = useState<IUserLogin | null>(null);
   const navigate = useNavigate();
+  const login = useUserLogin();
 
   useEffect(() => {
-    const storedUser = localStorage.getItem('user');
-    const storedToken = localStorage.getItem('token');
-
-    if (storedUser && storedToken) {
+    const getUserData = async () => {
       try {
-        const userParsed = JSON.parse(storedUser) as IUserData;
+        const accessToken = localStorage.getItem('accessToken');
+        const refreshToken = localStorage.getItem('refreshToken');
 
-        setUser(userParsed);
-      } catch {
-        setUser({
-          id: '',
-          name: storedUser,
-          email: '',
-        });
+        if (!accessToken || !refreshToken) {
+          setIsLoading(false);
+          return;
+        }
+
+        const user = await getUser(accessToken);
+
+        if (user) {
+          setUser(user);
+        }
+
+        setIsLoading(false);
+      } catch (error) {
+        console.error(error);
+        setIsLoading(false);
       }
-    }
+    };
 
-    setIsLoading(false);
+    getUserData();
   }, []);
 
-  async function login(email: string, _password: string) {
+  async function loginService(email: string, password: string) {
     setIsLoading(true);
 
     try {
-      const fakeUser = {
-        id: '1',
-        name: 'João',
-        email,
-      };
+      const userData = await login.mutateAsync({ email, password });
 
-      setUser(fakeUser);
+      localStorage.setItem('accessToken', userData.tokens.accessToken);
+      localStorage.setItem('refreshToken', userData.tokens.refreshToken);
 
-      localStorage.setItem('user', JSON.stringify(fakeUser));
-      localStorage.setItem('token', '123');
-
-      // if (!response.ok) {
-      //   toast.error(`${dataUser.error}`);
-      //   return;
-      // }
-
-      // setUser({
-      //   id: dataUser.id,
-      //   name: dataUser.name,
-      //   email: dataUser.email,
-      // });
-
-      // localStorage.setItem('user', dataUser.name);
-      // localStorage.setItem('token', dataUser.token);
-
+      setUser(userData);
       navigate('/dash');
     } catch (error) {
-      console.error(error);
-      toast.error('error');
+      toast.error('Erro ao fazer login.');
     } finally {
       setIsLoading(false);
     }
@@ -90,8 +74,8 @@ export const AuthProvider = ({ children }: IAuthProviderProps) => {
 
   function logOut() {
     setUser(null);
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
+    localStorage.removeItem('accessToken');
+    localStorage.removeItem('refreshToken');
 
     navigate('/');
   }
@@ -100,7 +84,7 @@ export const AuthProvider = ({ children }: IAuthProviderProps) => {
     user,
     isAuthenticated: !!user,
     isLoading,
-    login,
+    loginService,
     logOut,
   };
 
