@@ -30,13 +30,13 @@ export const RegisterForm = () => {
   return (
     <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
       <Input.Root>
-        <Input.Label>E-mail</Input.Label>
+        <Input.Label>Nome</Input.Label>
         <Input.FormField
-          type="email"
-          placeholder="Digite seu e-mail"
-          {...register('email')}
+          type="text"
+          placeholder="Digite seu nome"
+          {...register('name')}
         />
-        <Input.ErrorMessage message={errors?.email?.message} />
+        <Input.ErrorMessage message={errors?.name?.message} />
       </Input.Root>
 
       <Input.Root>
