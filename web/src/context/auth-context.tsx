@@ -84,6 +84,7 @@ export const AuthProvider = ({ children }: IAuthProviderProps) => {
       };
 
       setUser(fakeUser);
+
       localStorage.setItem('user', JSON.stringify(fakeUser));
       localStorage.setItem('token', '123');
 
@@ -101,7 +102,7 @@ export const AuthProvider = ({ children }: IAuthProviderProps) => {
       // localStorage.setItem('user', dataUser.name);
       // localStorage.setItem('token', dataUser.token);
 
-      navigate('/user');
+      navigate('/dash');
     } catch (error) {
       console.error(error);
       toast.error('error');
