@@ -23,6 +23,7 @@ export const RegisterForm = ({ setStep }: IRegisterFormProps) => {
     register,
     formState: { errors },
     handleSubmit,
+    reset,
   } = useForm<IRegisterFormSchema>({
     resolver: zodResolver(registerFormSchema),
     defaultValues: {
@@ -36,6 +37,7 @@ export const RegisterForm = ({ setStep }: IRegisterFormProps) => {
     try {
       await createUser.mutateAsync(data);
       setStep('login');
+      reset();
     } catch {}
   };
 
