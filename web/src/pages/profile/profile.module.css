@@ -1,0 +1,43 @@
+.profile__wrapper {
+  background: var(--tertiary-color);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+  min-height: calc(100vh - 70px);
+  padding: 0 2rem;
+}
+
+.card__wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 2.5rem;
+
+  width: 900px;
+  margin: 0 auto;
+
+  border: 1px solid var(--tertiary-color);
+  border-radius: 1rem;
+  background: var(--color-white);
+}
+
+.btn__delete {
+  margin-top: 0.75rem;
+}
+
+@media (max-width: 968px) {
+  .card__wrapper {
+    width: 100%;
+  }
+}
+
+@media (max-width: 468px) {
+  .profile__wrapper {
+    padding: 0 1.5rem;
+  }
+  .card__wrapper {
+    padding: 2rem 1.5rem;
+  }
+}
