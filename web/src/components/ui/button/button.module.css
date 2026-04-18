@@ -19,12 +19,11 @@
 }
 
 .cancel {
-  background-color: var(--color-white);
-  border-color: var(--color-gray-40);
-  color: var(--color-black-100);
+  background-color: var(--error);
+  border-color: var(--error);
+  color: var(--color-white);
 }
 .cancel:hover {
-  background-color: var(--color-white-80);
 }
 
 .default {
