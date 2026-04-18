@@ -3,6 +3,7 @@ import {
     IdGeneratorAdapter,
     PasswordHashAdapter,
     TokenEmailGeneratorAdapter,
+    TokensGeneratorAdapter,
 } from '../../adapters';
 import {
     CreateUserController,
@@ -34,6 +35,7 @@ export const makeCreateUserController = () => {
     const createEmailVerificationRepository =
         new PostgresEmailVerificationRepository();
     const emailAdapter = new EmailAdapter();
+    const tokensGeneratorAdapter = new TokensGeneratorAdapter();
 
     const createUserUseCase = new CreateUserUseCase(
         getUserByEmailRepository,
@@ -43,6 +45,7 @@ export const makeCreateUserController = () => {
         tokenEmailGeneratorAdapter,
         createEmailVerificationRepository,
         emailAdapter,
+        tokensGeneratorAdapter,
     );
 
     const createUserController = new CreateUserController(createUserUseCase);

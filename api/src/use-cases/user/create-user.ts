@@ -10,6 +10,7 @@ import {
     IIdGeneratorAdapter,
     IPasswordHashAdapter,
     ITokenEmailGeneratorAdapter,
+    ITokensGeneratorAdapter,
 } from '../../interfaces/adapters';
 import { EMAIL_VERIFICATION_EXPIRY_MS } from '../../lib/email-verification-expiry';
 
@@ -21,6 +22,7 @@ export class CreateUserUseCase {
     private tokenEmailGeneratorAdapter: ITokenEmailGeneratorAdapter;
     private createEmailVerificationRepository: ICreateEmailVerificationRepository;
     private emailAdapter: IEmailAdapter;
+    private tokensGeneratorAdapter: ITokensGeneratorAdapter;
 
     constructor(
         getUserByEmailRepository: IGetUserByEmailRepository,
@@ -30,6 +32,7 @@ export class CreateUserUseCase {
         tokenEmailGeneratorAdapter: ITokenEmailGeneratorAdapter,
         createEmailVerificationRepository: ICreateEmailVerificationRepository,
         emailAdapter: IEmailAdapter,
+        tokensGeneratorAdapter: ITokensGeneratorAdapter,
     ) {
         this.getUserByEmailRepository = getUserByEmailRepository;
         this.createUserRepository = createUserRepository;
@@ -39,6 +42,7 @@ export class CreateUserUseCase {
         this.createEmailVerificationRepository =
             createEmailVerificationRepository;
         this.emailAdapter = emailAdapter;
+        this.tokensGeneratorAdapter = tokensGeneratorAdapter;
     }
 
     async execute(user: IUser) {
@@ -75,6 +79,11 @@ export class CreateUserUseCase {
 
         await this.emailAdapter.sendVerificationEmail(user.email, token);
 
-        return createdUser;
+        const tokens = this.tokensGeneratorAdapter.execute(user.id);
+
+        return {
+            ...createdUser,
+            tokens,
+        };
     }
 }
