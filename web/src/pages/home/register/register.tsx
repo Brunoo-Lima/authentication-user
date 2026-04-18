@@ -22,7 +22,7 @@ export const Register = ({ setStep }: IRegisterProps) => {
 
         <h1 className={s.title}>Dados Pessoais</h1>
       </div>
-      <RegisterForm />
+      <RegisterForm setStep={setStep} />
     </>
   );
 };

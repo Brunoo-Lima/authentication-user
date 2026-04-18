@@ -8,8 +8,17 @@ import {
   IRegisterFormSchema,
   registerFormSchema,
 } from '../../../validations/register-form-schema';
+import { IUser } from '../../../@types/IUser';
+import { useCreateUser } from '../../../services/signup';
+import { IStep } from '../../../pages/home/home';
 
-export const RegisterForm = () => {
+interface IRegisterFormProps {
+  setStep: React.Dispatch<React.SetStateAction<IStep>>;
+}
+
+export const RegisterForm = ({ setStep }: IRegisterFormProps) => {
+  const createUser = useCreateUser();
+
   const {
     register,
     formState: { errors },
@@ -23,8 +32,11 @@ export const RegisterForm = () => {
     },
   });
 
-  const onSubmit = (data: any) => {
-    console.log(data);
+  const onSubmit = async (data: IUser) => {
+    try {
+      await createUser.mutateAsync(data);
+      setStep('login');
+    } catch {}
   };
 
   return (
@@ -57,8 +69,8 @@ export const RegisterForm = () => {
         error={errors?.password}
       />
 
-      <Button type="submit" className={s.btn}>
-        Criar Usuário
+      <Button type="submit" className={s.btn} disabled={createUser.isPending}>
+        {createUser.isPending ? 'Cadastrando...' : 'Cadastrar'}
       </Button>
     </form>
   );

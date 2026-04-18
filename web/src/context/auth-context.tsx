@@ -50,29 +50,6 @@ export const AuthProvider = ({ children }: IAuthProviderProps) => {
     setIsLoading(false);
   }, []);
 
-  // async function createUser() {
-  //   if (!userData.name || !userData.email || !userData.password) {
-  //     toast.warn('Preencha os campos!');
-  //     return;
-  //   }
-  //   try {
-  //     const { url, options } = USER_REGISTER(userData);
-
-  //     const response = await fetch(url, options);
-  //     const data = await response.json();
-
-  //     if (!response.ok) {
-  //       toast.error(`${data.error}`);
-  //     } else {
-  //       setUserData(data);
-  //       toast.success('Usuário criado com sucesso');
-  //       navigate('/');
-  //     }
-  //   } catch (error) {
-  //     toast.error(`${error}`);
-  //   }
-  // }
-
   async function login(email: string, _password: string) {
     setIsLoading(true);
 
