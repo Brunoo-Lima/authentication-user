@@ -1,0 +1,30 @@
+.header__wrapper {
+  height: 70px;
+  width: 100%;
+  background-color: var(--secondary-color);
+  display: flex;
+  align-items: center;
+
+  padding: 0 3rem;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin: 0 auto;
+}
+
+.nav a {
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.nav a:hover {
+  color: var(--color-neutral-80);
+}
+
+.nav a.active {
+  color: var(--tertiary-color);
+}
