@@ -5,17 +5,26 @@
 }
 
 :root {
-  --primary-color: #302d28;
-  --secondary-color: #e48f4f;
-  --tertiary-color: #e9e9e9;
+  --primary-color: #e48f4f;
+  --primary-color-80: #f0ac78;
+  --primary-color-20: #ffcba4;
+
+  --primary-color-dark-80: #c37439;
+  --primary-color-dark: #8e4c1b;
+
+  --secondary-color: #e9e9e9;
 
   --color-white: #ffffff;
 
-  --color-neutral-80: #333333d3;
+  --color-neutral: #302d28;
+  --color-neutral-80: #4d4b48;
 
-  --link-color: #4f94e4;
+  --color-neutral-dark: #15130f;
+
+  --link-color: #2563eb;
 
   --error: #f44336;
+  --error-80: #ff6659;
 }
 
 a {
@@ -40,6 +49,8 @@ img {
 
 body {
   font-family: 'Roboto', sans-serif;
+  color: var(--color-neutral);
+
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
 }
