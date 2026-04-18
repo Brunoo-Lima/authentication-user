@@ -1,11 +1,16 @@
 .header__wrapper {
   height: 70px;
   width: 100%;
-  background-color: var(--secondary-color);
+  background-color: var(--primary-color-dark-80);
   display: flex;
   align-items: center;
 
   padding: 0 3rem;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: 700;
 }
 
 .nav {
@@ -19,6 +24,7 @@
 .nav a {
   font-weight: 500;
   transition: color 0.3s ease;
+  color: var(--color-neutral);
 }
 
 .nav a:hover {
@@ -26,7 +32,7 @@
 }
 
 .nav a.active {
-  color: var(--tertiary-color);
+  color: var(--color-white);
 }
 
 @media (max-width: 568px) {

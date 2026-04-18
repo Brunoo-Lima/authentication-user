@@ -6,7 +6,7 @@ export const Header = () => {
 
   return (
     <header className={s.header__wrapper}>
-      <h1>Logo</h1>
+      <strong className={s.logo}>Logo</strong>
 
       <nav className={s.nav}>
         <NavLink
