@@ -5,7 +5,7 @@ import { useAuth } from '../../hooks/use-auth';
 import s from './dash.module.css';
 
 export const Dash = () => {
-  const { logOut } = useAuth();
+  const { logOut, user } = useAuth();
 
   return (
     <>
@@ -14,7 +14,7 @@ export const Dash = () => {
       <PageContainer>
         <h1 className={s.title}>
           Olá,
-          <span className={s.user}> Nome do usuario</span>
+          <span className={s.user}> {user?.name}</span>
         </h1>
 
         <Button type="button" onClick={logOut}>
