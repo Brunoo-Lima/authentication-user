@@ -7,3 +7,16 @@ export const forgotPasswordFormSchema = z.object({
 export type IForgotPasswordFormSchema = z.infer<
   typeof forgotPasswordFormSchema
 >;
+
+export const resetPasswordFormSchema = z.object({
+  password: z
+    .string('Senha é obrigatória')
+    .trim()
+    .min(6, { error: 'Senha deve ter pelo menos 6 caracteres' }),
+  confirmPassword: z
+    .string('Senha é obrigatória')
+    .trim()
+    .min(6, { error: 'Senha deve ter pelo menos 6 caracteres' }),
+});
+
+export type IResetPasswordFormSchema = z.infer<typeof resetPasswordFormSchema>;

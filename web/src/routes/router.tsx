@@ -5,12 +5,14 @@ import { DefaultLayout } from '../components/default-layout/default-layout';
 import { NotFound } from '../components/not-found/not-found';
 import { Profile } from '../pages/profile/profile';
 import { Dash } from '../pages/dash/dash';
+import { ResetPassword } from '../pages/reset-password/reset-password';
 
 export function AppRouter() {
   return (
     <Routes>
       {/* Rota pública */}
       <Route path="/" element={<Home />} />
+      <Route path="/reset-password" element={<ResetPassword />} />
 
       {/* Rotas protegidas */}
       <Route element={<PrivateRoute />}>
