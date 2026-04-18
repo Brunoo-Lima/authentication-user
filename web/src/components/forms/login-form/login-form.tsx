@@ -16,7 +16,7 @@ interface ILoginFormProps {
   setStep: React.Dispatch<React.SetStateAction<IStep>>;
 }
 export const LoginForm = ({ setStep }: ILoginFormProps) => {
-  const { login } = useAuth();
+  const { loginService, isLoading } = useAuth();
   const {
     register,
     handleSubmit,
@@ -30,9 +30,7 @@ export const LoginForm = ({ setStep }: ILoginFormProps) => {
   });
 
   const onSubmit = (data: any) => {
-    console.log(data);
-
-    login(data.email, data.password);
+    loginService(data.email, data.password);
   };
 
   return (
@@ -65,7 +63,7 @@ export const LoginForm = ({ setStep }: ILoginFormProps) => {
       </div>
 
       <Button type="submit" className={s.button__submit} variant="default">
-        Entrar
+        {isLoading ? 'Entrando...' : 'Entrar'}
       </Button>
 
       <p className={s.register}>
