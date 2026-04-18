@@ -2,13 +2,14 @@ import s from './profile.module.css';
 import { Head } from '../../components/head';
 import { PersonalForm } from '../../components/forms/personal-form/personal-form';
 import { Button } from '../../components/ui/button/button';
+import { PageContainer } from '../../components/ui/page-container/page-container';
 
 export const Profile = () => {
   return (
     <>
       <Head title="Meu perfil" />
 
-      <section className={s.profile__wrapper}>
+      <PageContainer>
         <div className={s.card__wrapper}>
           <strong>Informações pessoais</strong>
           <PersonalForm />
@@ -21,7 +22,7 @@ export const Profile = () => {
             Deletar conta
           </Button>
         </div>
-      </section>
+      </PageContainer>
     </>
   );
 };
