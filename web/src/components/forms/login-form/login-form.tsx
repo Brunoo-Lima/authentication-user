@@ -10,11 +10,13 @@ import {
 } from '../../../validations/login-form-schema';
 import React from 'react';
 import { IStep } from '../../../pages/home/home';
+import { useAuth } from '../../../hooks/use-auth';
 
 interface ILoginFormProps {
   setStep: React.Dispatch<React.SetStateAction<IStep>>;
 }
 export const LoginForm = ({ setStep }: ILoginFormProps) => {
+  const { login } = useAuth();
   const {
     register,
     handleSubmit,
@@ -29,6 +31,8 @@ export const LoginForm = ({ setStep }: ILoginFormProps) => {
 
   const onSubmit = (data: any) => {
     console.log(data);
+
+    login(data.email, data.password);
   };
 
   return (
