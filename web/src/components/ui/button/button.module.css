@@ -24,16 +24,18 @@
   color: var(--color-white);
 }
 .cancel:hover {
+  background-color: var(--error-80);
 }
 
 .default {
-  background-color: var(--secondary-color);
-  color: var(--primary-color);
-  border-color: var(--secondary-color);
+  background-color: var(--primary-color);
+  color: var(--color-neutral);
+  border-color: var(--primary-color);
 }
 
 .default:hover {
-  background-color: var(--secondary-color);
+  background-color: var(--primary-color-dark-80);
+  border-color: var(--primary-color-dark-80);
 }
 
 .default:disabled {
@@ -42,21 +44,11 @@
 
 .ghost {
   background-color: var(--color-white);
-  border-color: var(--tertiary-color);
+  border-color: var(--secondary-color);
   color: var(--primary-color);
 }
 
 .ghost:hover {
-  background-color: var(--tertiary-color);
+  background-color: var(--secondary-color);
   border-color: var(--color-white);
-}
-
-.outline {
-  background-color: transparent;
-  color: var(--color-white);
-  border-color: var(--color-white);
-}
-
-.outline:hover {
-  border-color: var(--color-gray-20);
 }

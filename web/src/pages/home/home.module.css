@@ -3,11 +3,11 @@
   grid-template-columns: 1fr 1fr;
   align-items: center;
   min-height: 100vh;
-  background: var(--tertiary-color);
+  background-color: var(--secondary-color);
 }
 
 .background__wrapper {
-  background: #ffffff !important;
+  background-color: var(--color-white);
   height: 100%;
   display: flex;
   align-items: center;

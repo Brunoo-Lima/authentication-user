@@ -9,3 +9,8 @@
   height: 40px;
   padding: 0;
 }
+
+.title {
+  font-size: 2.5rem;
+  color: var(--color-neutral);
+}

@@ -7,9 +7,19 @@
   width: 900px;
   margin: 0 auto;
 
-  border: 1px solid var(--tertiary-color);
+  border: 1px solid var(--secondary-color);
   border-radius: 1rem;
   background: var(--color-white);
+}
+
+strong {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+p {
+  font-size: 0.875rem;
+  color: var(--color-neutral-80);
 }
 
 .btn__delete {

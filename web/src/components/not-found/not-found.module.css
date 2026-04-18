@@ -4,7 +4,7 @@
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  background: var(--tertiary-color);
+  background: var(--secondary-color);
 }
 
 .error__logo {
@@ -24,14 +24,14 @@
   padding: 0.75rem 1rem;
   border-radius: 8px;
   border: 1px solid transparent;
-  color: #ffffff;
+  color: var(--color-white);
   transition: 0.3s;
   font-weight: bold;
 }
 
 .link:hover {
   border: 1px solid var(--secondary-color);
-  background: #ffffff;
+  background: var(--color-white);
   color: var(--secondary-color);
 }
 

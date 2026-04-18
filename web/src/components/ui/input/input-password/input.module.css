@@ -7,7 +7,7 @@
 .label {
   font-size: 1rem;
   font-weight: 400;
-  color: var(--primary-color);
+  color: var(--color-neutral);
 }
 
 .input__wrapper {
@@ -18,8 +18,10 @@
   align-items: center;
 
   border-radius: 0.5rem;
-  border: 1px solid var(--tertiary-color);
+  border: 1px solid var(--secondary-color);
   background-color: var(--color-white);
+
+  height: 40px;
 
   transition: all 0.2s ease-in-out;
 }
@@ -33,19 +35,21 @@
   padding: 0.75rem 1rem;
   outline: none;
 
+  height: 40px;
+
   border: none;
   background: transparent;
   border-radius: 0.5rem;
 
   font-size: 0.875rem;
   font-weight: 400;
-  color: var(--primary-color);
+  color: var(--color-neutral);
 
   transition: border-color 0.2s ease;
 }
 
 .input__field::placeholder {
-  color: var(--primary-color);
+  color: var(--color-neutral);
   opacity: 0.7;
 }
 

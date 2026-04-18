@@ -13,8 +13,14 @@
 
 .forgot__password {
   font-size: 0.75rem;
-  color: var(--secondary-color);
+  color: var(--primary-color);
   cursor: pointer;
+
+  transition: color 0.3s ease;
+}
+
+.forgot__password:hover {
+  color: var(--primary-color-dark-80);
 }
 
 .button__submit {
@@ -25,9 +31,16 @@
   text-align: center;
   margin-top: 0.75rem;
   font-size: 0.875rem;
+  color: var(--color-neutral-80);
 }
 
 .register span {
   color: var(--link-color);
   cursor: pointer;
+
+  transition: all 0.3s ease;
+}
+
+.register span:hover {
+  text-decoration: underline;
 }
