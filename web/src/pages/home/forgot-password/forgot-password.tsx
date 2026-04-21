@@ -26,7 +26,7 @@ export const ForgotPassword = ({ setStep }: IForgotPasswordProps) => {
         redefinir sua senha.
       </p>
 
-      <ForgotPasswordForm />
+      <ForgotPasswordForm setStep={setStep} />
     </>
   );
 };

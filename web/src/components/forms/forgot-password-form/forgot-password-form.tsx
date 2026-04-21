@@ -7,8 +7,14 @@ import {
   IForgotPasswordFormSchema,
 } from '../../../validations/password-form-schema';
 import { Button } from '../../ui/button/button';
+import { useForgotPassword } from '../../../services/password';
+import { toast } from 'sonner';
+import { IStep } from '../../../pages/home/home';
 
-export const ForgotPasswordForm = () => {
+interface IForgotPasswordProps {
+  setStep: React.Dispatch<React.SetStateAction<IStep>>;
+}
+export const ForgotPasswordForm = ({ setStep }: IForgotPasswordProps) => {
   const {
     register,
     handleSubmit,
@@ -19,9 +25,18 @@ export const ForgotPasswordForm = () => {
       email: '',
     },
   });
+  const forgotPassword = useForgotPassword();
 
-  const onSubmit = (data: any) => {
-    console.log(data);
+  const onSubmit = async (data: IForgotPasswordFormSchema) => {
+    try {
+      forgotPassword.mutateAsync(data.email, {
+        onSuccess: (data) => {
+          const message = data?.message || 'Email enviado com sucesso!';
+          toast.success(message);
+          setStep('login');
+        },
+      });
+    } catch {}
   };
 
   return (
