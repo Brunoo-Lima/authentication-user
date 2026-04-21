@@ -1,30 +1,53 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import {
-  IRegisterFormSchema,
-  registerFormSchema,
+  IUpdateFormSchema,
+  updateFormSchema,
 } from '../../../validations/register-form-schema';
 import * as Input from '../../ui/input/input';
-import { InputPassword } from '../../ui/input/input-password/input-password';
 import { Button } from '../../ui/button/button';
 import s from './personal-form.module.css';
+import { useAuth } from '../../../hooks/use-auth';
+import { useEffect } from 'react';
+import { useUpdateUser } from '../../../services/user';
+import { toast } from 'sonner';
 
 export const PersonalForm = () => {
+  const { user, refreshUser } = useAuth();
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<IRegisterFormSchema>({
-    resolver: zodResolver(registerFormSchema),
+    setValue,
+  } = useForm<IUpdateFormSchema>({
+    resolver: zodResolver(updateFormSchema),
     defaultValues: {
       name: '',
       email: '',
-      password: '',
     },
   });
+  const updateUser = useUpdateUser();
 
-  const onSubmit = (data: any) => {
-    console.log(data);
+  useEffect(() => {
+    if (user) {
+      setValue('name', user.name);
+      setValue('email', user.email);
+    }
+  }, [user, setValue]);
+
+  const onSubmit = (data: Partial<IUpdateFormSchema>) => {
+    updateUser.mutate(
+      {
+        name: data.name,
+        email: data.email,
+      },
+      {
+        onSuccess: async () => {
+          await refreshUser();
+          toast.success('Usuário atualizado com sucesso!');
+        },
+      },
+    );
   };
 
   return (
@@ -49,16 +72,8 @@ export const PersonalForm = () => {
         <Input.ErrorMessage message={errors?.email?.message} />
       </Input.Root>
 
-      <InputPassword
-        label="Senha"
-        placeholder="Digite sua senha"
-        maxLength={6}
-        {...register('password')}
-        error={errors?.password}
-      />
-
       <Button className={s.btn__submit} type="submit" variant="default">
-        Salvar alterações
+        {updateUser.isPending ? 'Salvando...' : 'Salvar alterações'}
       </Button>
     </form>
   );

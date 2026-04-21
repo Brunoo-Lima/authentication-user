@@ -12,3 +12,12 @@ export const registerFormSchema = z.object({
 });
 
 export type IRegisterFormSchema = z.infer<typeof registerFormSchema>;
+
+export const updateFormSchema = z.object({
+  name: z.string('Nome é obrigatório').trim().min(1, {
+    error: 'Nome é obrigatório',
+  }),
+  email: z.string().trim().min(1, { error: 'Email é obrigatório' }),
+});
+
+export type IUpdateFormSchema = z.infer<typeof updateFormSchema>;
