@@ -21,3 +21,22 @@ export const useForgotPassword = () => {
     },
   });
 };
+
+const resetPassword = async (token: string, password: string) => {
+  const { data } = await api.post('/auth/reset-password', { token, password });
+
+  return data;
+};
+
+export const useResetPassword = () => {
+  return useMutation({
+    mutationKey: ['reset-password'],
+    mutationFn: (data: { token: string; password: string }) => {
+      return resetPassword(data.token, data.password);
+    },
+    onError: (error: AxiosError) => {
+      const message = error.message || 'Erro ao enviar email.';
+      toast.error(message);
+    },
+  });
+};

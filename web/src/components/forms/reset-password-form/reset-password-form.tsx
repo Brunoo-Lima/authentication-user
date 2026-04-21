@@ -7,8 +7,16 @@ import {
 import s from './reset-password-form.module.css';
 import { InputPassword } from '../../ui/input/input-password/input-password';
 import { Button } from '../../ui/button/button';
+import { useResetPassword } from '../../../services/password';
+import { toast } from 'sonner';
+import { useNavigate } from 'react-router-dom';
 
-export const ResetPasswordForm = () => {
+interface IResetPasswordFormProps {
+  token: string | null;
+}
+
+export const ResetPasswordForm = ({ token }: IResetPasswordFormProps) => {
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -16,9 +24,20 @@ export const ResetPasswordForm = () => {
   } = useForm<IResetPasswordFormSchema>({
     resolver: zodResolver(resetPasswordFormSchema),
   });
+  const resetPassword = useResetPassword();
 
-  const onSubmit = (data: any) => {
-    console.log(data);
+  const onSubmit = async (data: IResetPasswordFormSchema) => {
+    try {
+      await resetPassword.mutateAsync(
+        { token: token || '', password: data.password },
+        {
+          onSuccess: () => {
+            toast.success('Senha atualizada com sucesso!');
+            navigate('/');
+          },
+        },
+      );
+    } catch {}
   };
 
   return (
@@ -40,7 +59,7 @@ export const ResetPasswordForm = () => {
       />
 
       <Button className={s.btn__submit} variant="default" type="submit">
-        Enviar
+        {resetPassword.isPending ? 'Atualizando...' : 'Atualizar'}
       </Button>
     </form>
   );

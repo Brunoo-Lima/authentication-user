@@ -51,8 +51,13 @@ export const ForgotPasswordForm = ({ setStep }: IForgotPasswordProps) => {
         <Input.ErrorMessage message={errors?.email?.message} />
       </Input.Root>
 
-      <Button className={s.btn__submit} variant="default" type="submit">
-        Enviar
+      <Button
+        className={s.btn__submit}
+        variant="default"
+        type="submit"
+        disabled={forgotPassword.isPending}
+      >
+        {forgotPassword.isPending ? 'Enviando...' : 'Enviar'}
       </Button>
     </form>
   );
