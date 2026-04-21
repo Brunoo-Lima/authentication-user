@@ -42,8 +42,24 @@ api.interceptors.response.use(
 
   async (error) => {
     const originalRequest: RetryConfig = error.config;
+    const requestUrl = originalRequest?.url ?? '';
+    const isAuthRoute =
+      requestUrl.includes('/auth') || requestUrl.includes('/refresh-token');
 
-    if (error.response?.status === 401 && !originalRequest._retry) {
+    if (
+      error.response?.status === 401 &&
+      !originalRequest?._retry &&
+      !isAuthRoute
+    ) {
+      const refreshToken = localStorage.getItem('refreshToken');
+
+      if (!refreshToken) {
+        localStorage.clear();
+        return Promise.reject(
+          new Error('Sessão expirada. Faça login novamente.'),
+        );
+      }
+
       if (isRefreshing) {
         return new Promise<string>((resolve, reject) => {
           failedQueue.push({ resolve, reject });
@@ -62,7 +78,6 @@ api.interceptors.response.use(
       isRefreshing = true;
 
       try {
-        const refreshToken = localStorage.getItem('refreshToken');
         const { data } = await axios.post<{ accessToken: string }>(
           `${import.meta.env.VITE_API_URL}/auth/refresh-token`,
           { refreshToken },
@@ -76,7 +91,6 @@ api.interceptors.response.use(
       } catch (refreshError) {
         processQueue(refreshError, null);
         localStorage.clear();
-        window.location.href = '/';
         return Promise.reject(refreshError);
       } finally {
         isRefreshing = false;
