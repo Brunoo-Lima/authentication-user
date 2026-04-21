@@ -1,4 +1,4 @@
-import { RefObject, useRef, useEffect } from 'react';
+import { RefObject, useRef, useEffect, useState } from 'react';
 import s from './modal.module.css';
 import { createPortal } from 'react-dom';
 import { useOutside } from '../../../hooks/use-outside';
@@ -12,7 +12,7 @@ interface IRootProps {
 
 export const Root = ({ children, classNameCustom, onClose }: IRootProps) => {
   const ref = useRef<HTMLDivElement>(null);
-  const portalRef = useRef<HTMLElement | null>(null);
+  const [portalEl, setPortalEl] = useState<HTMLElement | null>(null);
 
   useOutside(ref as RefObject<HTMLElement>, onClose as () => void);
 
@@ -21,14 +21,14 @@ export const Root = ({ children, classNameCustom, onClose }: IRootProps) => {
     el.setAttribute('id', 'modal-root');
 
     document.body.appendChild(el);
-    portalRef.current = el;
+    setPortalEl(el);
 
     return () => {
       document.body.removeChild(el);
     };
   }, []);
 
-  if (!portalRef.current) return null;
+  if (!portalEl) return null;
 
   return createPortal(
     <div className={s.modal__overlay}>
@@ -36,7 +36,7 @@ export const Root = ({ children, classNameCustom, onClose }: IRootProps) => {
         {children}
       </div>
     </div>,
-    portalRef.current,
+    portalEl,
   );
 };
 
@@ -60,11 +60,21 @@ export const Title = ({ children }: ITitleProps) => {
 interface IButtonCloseProps {
   children: React.ReactNode;
   onClose: () => void;
+  classNameCustom?: string;
 }
 
-export const ButtonClose = ({ children, onClose }: IButtonCloseProps) => {
+export const ButtonClose = ({
+  children,
+  onClose,
+  classNameCustom,
+}: IButtonCloseProps) => {
   return (
-    <Button type="button" variant="ghost" onClick={onClose}>
+    <Button
+      type="button"
+      variant="ghost"
+      className={classNameCustom}
+      onClick={onClose}
+    >
       {children}
     </Button>
   );

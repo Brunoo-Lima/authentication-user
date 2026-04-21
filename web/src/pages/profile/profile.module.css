@@ -22,10 +22,6 @@ p {
   color: var(--color-neutral-80);
 }
 
-.btn__delete {
-  margin-top: 0.75rem;
-}
-
 @media (max-width: 968px) {
   .card__wrapper {
     width: 100%;

@@ -28,3 +28,26 @@ export const useUpdateUser = () => {
     },
   });
 };
+
+const deleteUser = async (id: string) => {
+  const { data } = await api.delete(`/users/me`, {
+    data: {
+      id,
+    },
+  });
+
+  return data;
+};
+
+export const useDeleteUser = () => {
+  return useMutation({
+    mutationKey: ['users'],
+    mutationFn: (id: string) => {
+      return deleteUser(id);
+    },
+    onError: (error: AxiosError) => {
+      const message = error.message || 'Erro ao deletar usuário.';
+      toast.error(message);
+    },
+  });
+};

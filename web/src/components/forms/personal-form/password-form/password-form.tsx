@@ -12,6 +12,7 @@ import React from 'react';
 import * as Modal from '../../../ui/modal/modal';
 import { useUpdateUser } from '../../../../services/user';
 import { toast } from 'sonner';
+import { XIcon } from 'lucide-react';
 
 interface IPasswordFormProps {
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -52,6 +53,12 @@ export const PasswordForm = ({ setIsOpen }: IPasswordFormProps) => {
     <Modal.Root>
       <Modal.Header>
         <Modal.Title>Alterar senha</Modal.Title>
+        <Modal.ButtonClose
+          classNameCustom={s.btn__close}
+          onClose={() => setIsOpen(false)}
+        >
+          <XIcon size={20} color="#302d28" />
+        </Modal.ButtonClose>
       </Modal.Header>
 
       <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
