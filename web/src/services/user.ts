@@ -10,7 +10,7 @@ export const getUser = async () => {
   return data;
 };
 
-export const updateUser = async (user: any) => {
+export const updateUser = async (user: Partial<IUser>) => {
   const { data } = await api.patch(`/users/me`, user);
 
   return data;

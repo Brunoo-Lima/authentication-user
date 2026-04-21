@@ -3,6 +3,7 @@ import { Head } from '../../components/head';
 import { PersonalForm } from '../../components/forms/personal-form/personal-form';
 import { Button } from '../../components/ui/button/button';
 import { PageContainer } from '../../components/ui/page-container/page-container';
+import { ButtonPassword } from './button-password/button-password';
 
 export const Profile = () => {
   return (
@@ -13,6 +14,8 @@ export const Profile = () => {
         <div className={s.card__wrapper}>
           <strong>Informações pessoais</strong>
           <PersonalForm />
+
+          <ButtonPassword />
         </div>
 
         <div className={s.card__wrapper}>
