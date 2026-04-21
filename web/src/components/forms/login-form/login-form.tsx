@@ -29,8 +29,8 @@ export const LoginForm = ({ setStep }: ILoginFormProps) => {
     },
   });
 
-  const onSubmit = (data: any) => {
-    loginService(data.email, data.password);
+  const onSubmit = async (data: ILoginFormSchema) => {
+    await loginService(data.email, data.password);
   };
 
   return (
@@ -62,7 +62,12 @@ export const LoginForm = ({ setStep }: ILoginFormProps) => {
         </span>
       </div>
 
-      <Button type="submit" className={s.button__submit} variant="default">
+      <Button
+        type="submit"
+        className={s.button__submit}
+        variant="default"
+        disabled={isLoading}
+      >
         {isLoading ? 'Entrando...' : 'Entrar'}
       </Button>
 

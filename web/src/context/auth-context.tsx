@@ -70,15 +70,22 @@ export const AuthProvider = ({ children }: IAuthProviderProps) => {
     setIsLoading(true);
 
     try {
-      const userData = await login.mutateAsync({ email, password });
+      await login.mutateAsync(
+        { email, password },
+        {
+          onSuccess: (user) => {
+            localStorage.setItem('accessToken', user.tokens.accessToken);
+            localStorage.setItem('refreshToken', user.tokens.refreshToken);
 
-      localStorage.setItem('accessToken', userData.tokens.accessToken);
-      localStorage.setItem('refreshToken', userData.tokens.refreshToken);
-
-      setUser(userData);
-      navigate('/dash');
-    } catch (error) {
-      toast.error('Erro ao fazer login.');
+            setUser(user);
+            toast.success('Login realizado com sucesso!');
+            navigate('/dash');
+          },
+        },
+      );
+    } catch (error: any) {
+      const message = error.message || 'Erro ao fazer login.';
+      toast.error(message);
     } finally {
       setIsLoading(false);
     }
