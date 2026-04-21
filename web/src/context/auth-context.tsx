@@ -9,6 +9,7 @@ interface IAuthContextProps {
   user: IUserLogin | null;
   loginService: (email: string, password: string) => Promise<void>;
   logOut: () => void;
+  refreshUser: () => Promise<void>;
   isAuthenticated: boolean;
   isLoading: boolean;
 }
@@ -27,26 +28,37 @@ export const AuthProvider = ({ children }: IAuthProviderProps) => {
   const navigate = useNavigate();
   const login = useUserLogin();
 
+  const refreshUser = async () => {
+    const refreshToken = localStorage.getItem('refreshToken');
+
+    if (!refreshToken) {
+      setUser(null);
+      return;
+    }
+
+    const userData = await getUser();
+
+    if (userData) {
+      setUser((previousUser) => {
+        if (!previousUser) {
+          return userData;
+        }
+
+        return {
+          ...previousUser,
+          ...userData,
+        };
+      });
+    }
+  };
+
   useEffect(() => {
     const getUserData = async () => {
       try {
-        const accessToken = localStorage.getItem('accessToken');
-        const refreshToken = localStorage.getItem('refreshToken');
-
-        if (!accessToken || !refreshToken) {
-          setIsLoading(false);
-          return;
-        }
-
-        const user = await getUser(accessToken);
-
-        if (user) {
-          setUser(user);
-        }
-
-        setIsLoading(false);
+        await refreshUser();
       } catch (error) {
         console.error(error);
+      } finally {
         setIsLoading(false);
       }
     };
@@ -86,6 +98,7 @@ export const AuthProvider = ({ children }: IAuthProviderProps) => {
     isLoading,
     loginService,
     logOut,
+    refreshUser,
   };
 
   return (
