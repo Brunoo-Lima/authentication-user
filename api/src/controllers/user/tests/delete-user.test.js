@@ -4,17 +4,17 @@ import { user } from '../../../tests';
 import { UserNotFoundError } from '../../../errors';
 
 describe('Delete User Controller', () => {
-    class DeleteUserRepositoryStub {
+    class DeleteUserUseCaseStub {
         async execute() {
             return user;
         }
     }
 
     const makeSut = () => {
-        const deleteUserRepositoryStub = new DeleteUserRepositoryStub();
-        const sut = new DeleteUserController(deleteUserRepositoryStub);
+        const deleteUserUseCaseStub = new DeleteUserUseCaseStub();
+        const sut = new DeleteUserController(deleteUserUseCaseStub);
 
-        return { sut, deleteUserRepositoryStub };
+        return { sut, deleteUserUseCaseStub };
     };
 
     const baseHttpRequest = {
@@ -44,8 +44,8 @@ describe('Delete User Controller', () => {
     });
 
     it('should return 404 if user is not found', async () => {
-        const { sut, deleteUserRepositoryStub } = makeSut();
-        jest.spyOn(deleteUserRepositoryStub, 'execute').mockRejectedValueOnce(
+        const { sut, deleteUserUseCaseStub } = makeSut();
+        jest.spyOn(deleteUserUseCaseStub, 'execute').mockRejectedValueOnce(
             new UserNotFoundError(),
         );
 
@@ -55,8 +55,8 @@ describe('Delete User Controller', () => {
     });
 
     it('should return 500 if DeleteUserUseCase throws', async () => {
-        const { sut, deleteUserRepositoryStub } = makeSut();
-        jest.spyOn(deleteUserRepositoryStub, 'execute').mockRejectedValueOnce(
+        const { sut, deleteUserUseCaseStub } = makeSut();
+        jest.spyOn(deleteUserUseCaseStub, 'execute').mockRejectedValueOnce(
             new Error(),
         );
 
