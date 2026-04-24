@@ -62,6 +62,22 @@ describe('Create user controller', () => {
         expect(response.statusCode).toBe(400);
     });
 
+    it('should return 400 if email is invalid', async () => {
+        const { sut } = makeSut();
+
+        const httpRequest = {
+            body: {
+                name: 'Test',
+                email: 'invalid_email',
+                password: '123456',
+            },
+        };
+
+        const response = await sut.execute(httpRequest);
+
+        expect(response.statusCode).toBe(400);
+    });
+
     it('should return 400 if password is missing', async () => {
         const { sut } = makeSut();
 
@@ -93,7 +109,7 @@ describe('Create user controller', () => {
         expect(response.statusCode).toBe(400);
     });
 
-    it('should return CreateUser with correct values', async () => {
+    it('should return 200 and call CreateUser with correct values', async () => {
         const { sut, createUserUseCaseStub } = makeSut();
         const executeSpy = jest.spyOn(createUserUseCaseStub, 'execute');
 
