@@ -6,8 +6,9 @@
         "dev": "tsx watch src/server.ts",
         "eslint:check": "eslint src --ext .ts",
         "postinstall": "prisma generate",
-        "test": "jest",
-        "test:watch": "jest --watch"
+        "test": "jest --runInBand --detectOpenHandles",
+        "test:watch": "jest --watch",
+        "test:coverage": "jest --coverage"
     },
     "license": "MIT",
     "devDependencies": {
