@@ -30,6 +30,7 @@ export class CreateUserController {
                 return badRequest({ message: error.message });
             }
 
+            console.log(error);
             return serverError();
         }
     }

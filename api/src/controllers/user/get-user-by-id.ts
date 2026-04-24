@@ -7,6 +7,7 @@ import {
     serverError,
     userNotFoundResponse,
 } from '../helpers';
+import { UserNotFoundError } from '../../errors';
 
 export class GetUserByIdController {
     private getUserByIdUseCase: IGetUserByIdUseCase;
@@ -27,13 +28,13 @@ export class GetUserByIdController {
 
             const user = await this.getUserByIdUseCase.execute(userId);
 
-            if (!user) {
+            return ok(user);
+        } catch (error) {
+            if (error instanceof UserNotFoundError) {
                 return userNotFoundResponse();
             }
 
-            return ok(user);
-        } catch (error) {
-            console.error(error);
+            console.log(error);
             return serverError();
         }
     }
