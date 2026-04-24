@@ -3,20 +3,17 @@ import { user } from '../../../tests/index';
 import { EmailAlreadyInUseError } from '../../../errors';
 
 describe('Create user controller', () => {
-    class CreateUserRepositoryStub {
+    class CreateUserUseCaseStub {
         async execute() {
             return user;
         }
     }
 
     const makeSut = () => {
-        const createUserRepositoryStub = new CreateUserRepositoryStub();
-        const sut = new CreateUserController(createUserRepositoryStub);
+        const createUserUseCaseStub = new CreateUserUseCaseStub();
+        const sut = new CreateUserController(createUserUseCaseStub);
 
-        return {
-            sut,
-            createUserRepositoryStub,
-        };
+        return { sut, createUserUseCaseStub };
     };
 
     const baseHttpRequest = {
@@ -97,8 +94,8 @@ describe('Create user controller', () => {
     });
 
     it('should return CreateUser with correct values', async () => {
-        const { sut, createUserRepositoryStub } = makeSut();
-        const executeSpy = jest.spyOn(createUserRepositoryStub, 'execute');
+        const { sut, createUserUseCaseStub } = makeSut();
+        const executeSpy = jest.spyOn(createUserUseCaseStub, 'execute');
 
         await sut.execute(baseHttpRequest);
 
@@ -109,9 +106,9 @@ describe('Create user controller', () => {
         });
     });
 
-    it('should return 500 if CreateUserRepository throws', async () => {
-        const { sut, createUserRepositoryStub } = makeSut();
-        jest.spyOn(createUserRepositoryStub, 'execute').mockRejectedValueOnce(
+    it('should return 500 if CreateUserUseCase throws', async () => {
+        const { sut, createUserUseCaseStub } = makeSut();
+        jest.spyOn(createUserUseCaseStub, 'execute').mockRejectedValueOnce(
             new Error(),
         );
 
@@ -121,8 +118,8 @@ describe('Create user controller', () => {
     });
 
     it('should return 400 if CreateUserUseCase throws EmailAlreadyInUseError', async () => {
-        const { sut, createUserRepositoryStub } = makeSut();
-        jest.spyOn(createUserRepositoryStub, 'execute').mockRejectedValueOnce(
+        const { sut, createUserUseCaseStub } = makeSut();
+        jest.spyOn(createUserUseCaseStub, 'execute').mockRejectedValueOnce(
             new EmailAlreadyInUseError(baseHttpRequest.body.email),
         );
 
