@@ -27,7 +27,7 @@ describe('Create user controller', () => {
         },
     };
 
-    it('should create a user successfully', async () => {
+    it('should return 201 if create a user successfully', async () => {
         const { sut } = makeSut();
 
         const response = await sut.execute(baseHttpRequest);
