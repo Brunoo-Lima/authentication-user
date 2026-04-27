@@ -4,7 +4,10 @@ import { RefreshTokenController } from '../refresh-token';
 describe('Refresh Token Controller', () => {
     class RefreshTokenUseCaseStub {
         async execute() {
-            return true;
+            return {
+                accessToken: 'access_token',
+                refreshToken: 'refresh_token',
+            };
         }
     }
 
@@ -27,6 +30,10 @@ describe('Refresh Token Controller', () => {
         const response = await sut.execute(baseHttpRequest);
 
         expect(response.statusCode).toBe(200);
+        expect(response.body).toEqual({
+            accessToken: 'access_token',
+            refreshToken: 'refresh_token',
+        });
     });
 
     it('should return 400 if refresh token is missing', async () => {
