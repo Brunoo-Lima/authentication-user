@@ -17,12 +17,12 @@ export const unauthorized = (message?: string) => ({
     },
 });
 
-export const forbidden = () => ({
-    statusCode: 403,
-    body: {
-        message: 'Forbidden',
-    },
-});
+// export const forbidden = () => ({
+//     statusCode: 403,
+//     body: {
+//         message: 'Forbidden',
+//     },
+// });
 
 export const ok = <T>(body: T) => ({
     statusCode: 200,
