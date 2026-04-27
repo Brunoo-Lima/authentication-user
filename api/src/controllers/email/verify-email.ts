@@ -7,6 +7,7 @@ import {
     InvalidTokenError,
 } from '../../errors';
 import { verifyEmailSchema } from '../../schemas/email';
+import { ZodError } from 'zod';
 
 export class VerifyEmailController {
     private verifyEmailUseCase: IVerifyEmailUseCase;
@@ -19,14 +20,16 @@ export class VerifyEmailController {
 
             await verifyEmailSchema.parseAsync({ token });
 
-            if (typeof token !== 'string') {
-                return badRequest({ message: 'Token inválido' });
-            }
-
-            const verifiedToken = await this.verifyEmailUseCase.execute(token);
+            const verifiedToken = await this.verifyEmailUseCase.execute(
+                token as string,
+            );
 
             return ok({ verifiedToken, message: 'Email verified' });
         } catch (error) {
+            if (error instanceof ZodError) {
+                return badRequest({ message: error.issues[0].message });
+            }
+
             if (error instanceof InvalidTokenError) {
                 return badRequest({ message: error.message });
             }
