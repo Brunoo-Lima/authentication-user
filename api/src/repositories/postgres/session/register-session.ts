@@ -1,6 +1,6 @@
 import { ISession } from '../../../@types/ISession';
 import { REFRESH_TOKEN_EXPIRY_MS } from '../../../lib/auth-session-expiry';
-import { prisma } from '../../../lib/prisma';
+import prisma from '../../../lib/prisma';
 
 export class PostgresRegisterSessionRepository {
     async execute(session: ISession) {

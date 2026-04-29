@@ -1,6 +1,6 @@
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime/client';
 import { IUpdateUser } from '../../../@types/IUser';
-import { prisma } from '../../../lib/prisma';
+import prisma from '../../../lib/prisma';
 import { UserNotFoundError } from '../../../errors';
 
 export class PostgresUpdateUserRepository {

@@ -1,4 +1,4 @@
-import { prisma } from '../../../lib/prisma';
+import prisma from '../../../lib/prisma';
 
 export class PostgresVerifyEmailRepository {
     async execute(token: string, user_id: string): Promise<void> {

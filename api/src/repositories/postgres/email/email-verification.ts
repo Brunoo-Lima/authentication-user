@@ -1,5 +1,5 @@
 import { ICreateEmailVerificationRepository } from '../../../interfaces/repositories';
-import { prisma } from '../../../lib/prisma';
+import prisma from '../../../lib/prisma';
 
 export class PostgresEmailVerificationRepository implements ICreateEmailVerificationRepository {
     async execute(

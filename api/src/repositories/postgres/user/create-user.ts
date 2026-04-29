@@ -1,5 +1,5 @@
 import { IUser } from '../../../@types/IUser';
-import { prisma } from '../../../lib/prisma';
+import prisma from '../../../lib/prisma';
 
 export class PostgresCreateUserRepository {
     async execute(user: IUser) {

@@ -1,5 +1,5 @@
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime/client';
-import { prisma } from '../../../lib/prisma';
+import prisma from '../../../lib/prisma';
 import { UserNotFoundError } from '../../../errors';
 
 export class PostgresDeleteUserRepository {
