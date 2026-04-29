@@ -3,7 +3,6 @@ import {
     ExpiredTokenError,
     InvalidTokenError,
 } from '../../../errors';
-import { user } from '../../../tests';
 import { VerifyEmailUseCase } from '../verify-email';
 
 describe('Verify Email Use Case', () => {

@@ -49,6 +49,18 @@ describe('Verify Email Controller', () => {
         expect(response.statusCode).toBe(400);
     });
 
+    it('should return 400 if token is missing', async () => {
+        const { sut } = makeSut();
+
+        const response = await sut.execute({
+            query: {
+                token: undefined,
+            },
+        });
+
+        expect(response.statusCode).toBe(400);
+    });
+
     it('should return 500 if VerifyEmailUseCase throws', async () => {
         const { sut, verifyEmailUseCaseStub } = makeSut();
         jest.spyOn(verifyEmailUseCaseStub, 'execute').mockImplementationOnce(
