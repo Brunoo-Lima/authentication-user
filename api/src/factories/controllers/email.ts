@@ -5,7 +5,7 @@ import {
 } from '../../repositories/postgres';
 import { VerifyEmailUseCase } from '../../use-cases';
 
-export const makeVerifyEmail = () => {
+export const makeVerifyEmailController = () => {
     const getEmailVerificationByTokenRepository =
         new PostgresGetEmailVerificationByTokenRepository();
     const verifyEmailRepository = new PostgresVerifyEmailRepository();
