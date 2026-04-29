@@ -105,6 +105,9 @@ importers:
       jest:
         specifier: ^30.3.0
         version: 30.3.0(@types/node@25.6.0)
+      jest-mock-extended:
+        specifier: 2.0.4
+        version: 2.0.4(jest@30.3.0(@types/node@25.6.0))(typescript@6.0.2)
       prettier:
         specifier: ^3.8.2
         version: 3.8.2
@@ -2292,6 +2295,12 @@ packages:
     resolution: {integrity: sha512-Z/j4Bo+4ySJ+JPJN3b2Qbl9hDq3VrXmnjjGEWD/x0BCXeOXPTV1iZYYzl2X8c1MaCOL+ewMyNBcm88sboE6YWw==}
     engines: {node: ^18.14.0 || ^20.0.0 || ^22.0.0 || >=24.0.0}
 
+  jest-mock-extended@2.0.4:
+    resolution: {integrity: sha512-MgL3B3GjURQFjjPGqbCANydA5BFNPygv0mYp4Tjfxohh9MWwxxX8Eq2p6ncCt/Vt+RAnaLlDaI7gwrDRD7Pt9A==}
+    peerDependencies:
+      jest: ^24.0.0 || ^25.0.0 || ^26.0.0 || ^27.0.0
+      typescript: ^3.0.0 || ^4.0.0
+
   jest-mock@30.3.0:
     resolution: {integrity: sha512-OTzICK8CpE+t4ndhKrwlIdbM6Pn8j00lvmSmq5ejiO+KxukbLjgOflKWMn3KE34EZdQm5RqTuKj+5RIEniYhog==}
     engines: {node: ^18.14.0 || ^20.0.0 || ^22.0.0 || >=24.0.0}
@@ -3018,6 +3027,11 @@ packages:
     engines: {node: '>=18.12'}
     peerDependencies:
       typescript: '>=4.8.4'
+
+  ts-essentials@7.0.3:
+    resolution: {integrity: sha512-8+gr5+lqO3G84KdiTSMRLtuyJ+nTBVRKuCrK4lidMPdVeEp0uqC875uE5NMcaA7YYMN7XsNiFQuMvasF8HT/xQ==}
+    peerDependencies:
+      typescript: '>=3.7.0'
 
   tslib@2.8.1:
     resolution: {integrity: sha512-oJFu94HQb+KVduSUQL7wnpmqnfmLsOA/nAh6b6EH0wCEoK0/mPeXU6c3wKDV83MkOuHPRHtSXKKU99IBazS/2w==}
@@ -5682,6 +5696,12 @@ snapshots:
       slash: 3.0.0
       stack-utils: 2.0.6
 
+  jest-mock-extended@2.0.4(jest@30.3.0(@types/node@25.6.0))(typescript@6.0.2):
+    dependencies:
+      jest: 30.3.0(@types/node@25.6.0)
+      ts-essentials: 7.0.3(typescript@6.0.2)
+      typescript: 6.0.2
+
   jest-mock@30.3.0:
     dependencies:
       '@jest/types': 30.3.0
@@ -6450,6 +6470,10 @@ snapshots:
   toidentifier@1.0.1: {}
 
   ts-api-utils@2.5.0(typescript@6.0.2):
+    dependencies:
+      typescript: 6.0.2
+
+  ts-essentials@7.0.3(typescript@6.0.2):
     dependencies:
       typescript: 6.0.2
 
